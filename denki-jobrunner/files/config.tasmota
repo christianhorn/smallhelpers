@@ -1,0 +1,9 @@
+#
+log advisory on 5 sec {
+	openmetrics.tasmotalive4
+}
+
+[access]
+disallow .* : all;
+disallow :* : all;
+allow local:* : enquire;

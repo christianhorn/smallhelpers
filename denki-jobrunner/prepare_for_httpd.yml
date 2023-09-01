@@ -1,0 +1,73 @@
+---
+- name: playbook test
+  hosts: all
+  gather_facts: yes
+  become: true
+  remote_user: chris
+
+  tasks:
+    - name: Ensure packages on Debian
+      apt:
+        name: 
+          - gcc
+          - libapr1-dev
+          - libaprutil1-dev
+        state: present
+      when: ansible_facts.os_family == 'Debian'
+
+    - name: Ensure packages on RHEL
+      yum:
+        name: 
+          - gcc
+          - bison
+          - flex
+          - apr-devel
+          - apr-util
+          - apr-util-devel
+          - apr-util-ldap
+          - apr-util-mysql
+          - apr-util-odbc
+          - apr-util-pgsql
+          - apr-util-sqlite
+          - pcre-devel
+          - openssl-libs
+          - libcurl-devel
+        state: present
+      when: (ansible_facts.os_family == 'RedHat') or
+            (ansible_facts.os_family == 'Fedora')
+
+    - name: Ensure packages on Arch/steam deck
+      pacman:
+        name:
+          - apr-util
+          - gcc
+          - make
+          - flex
+          - bison
+          - pcre2
+          - brotli
+          - libldap
+          - libxcrypt
+          - linux-headers
+          - linux-api-headers
+        state: present
+      when: ansible_facts.os_family == 'Archlinux'
+
+    - name: Ensure files are in place
+      copy:
+        src: "files/{{item}}"
+        dest: "/dev/shm/{{item}}"
+      loop:
+        - httpd-2.4.57.tar.bz2
+        - job_httpd_compile.sh
+        - job_httpd_extract.sh
+        - job_sleep.sh
+        - job_justload_4.sh
+
+    - name: Ensure job_* is executabls
+      shell:
+        cmd: chmod +x /dev/shm/job*
+
+#    - name: debug
+#      debug:
+#        var: ansible_facts

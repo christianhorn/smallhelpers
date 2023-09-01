@@ -1,0 +1,33 @@
+---
+- name: playbook test
+  hosts: all
+  gather_facts: yes
+  become: true
+  remote_user: chris
+
+  tasks:
+    - name: Ensure pmrep file is in place
+      copy:
+        src: files/tasmota.conf
+        dest: /etc/pcp/pmrep/tasmota.conf
+
+    - name: Ensure controlfile is in place
+      copy:
+        src: files/tasmota
+        dest: /etc/pcp/pmlogger/control.d/tasmota
+      notify: pmlogger restart
+
+    - name: Ensure pmlogger conffile is in place
+      copy:
+        src: files/config.tasmota
+        dest: /var/lib/pcp/config/pmlogger/config.tasmota
+      notify: pmlogger restart
+
+  handlers:
+    - name: pmlogger restart
+      shell:
+        cmd: systemctl restart pmlogger
+
+#    - name: debug
+#      debug:
+#        var: ansible_facts

@@ -1,0 +1,22 @@
+---
+- name: Remove tasmota pmlogger config
+  hosts: all
+  gather_facts: no
+  become: true
+  remote_user: chris
+
+  tasks:
+    - name: Ensure controlfile is removed
+      file:
+        path: /etc/pcp/pmlogger/control.d/tasmota
+        state: absent
+      notify: pmlogger restart
+
+  handlers:
+    - name: pmlogger restart
+      shell:
+        cmd: systemctl restart pmlogger
+
+#    - name: debug
+#      debug:
+#        var: ansible_facts

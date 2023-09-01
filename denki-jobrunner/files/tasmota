@@ -1,0 +1,1 @@
+kosmos n n PCP_ARCHIVE_DIR/tasmota -r -T24h10m -c config.tasmota -v 100Mb
