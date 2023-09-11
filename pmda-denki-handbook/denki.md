@@ -230,7 +230,7 @@ Wipeout-firefox on both Thinkpads shows almost identical
 consumption patterns.  Differences in cpu and GPU consumption
 between the programs are big.
 
-Results: Thinkpad T460s got a conumer attached with 6.1W
+Results: Thinkpad T460s got a consumer attached with 6.1W
 consumption as per external meter, while ++power_now++ reported
 7.8W (already subtracted the idle power, consumed by the system).
 With a 2.4W external consumer, the sytem reported 2.8W.
