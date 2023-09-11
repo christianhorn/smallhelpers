@@ -264,8 +264,9 @@ image:l480-gmeet-bo-bluetooth-then-chargingb.jpg[width=900]
 
 Possible features
 
-* pcp-htop as of PCP-6.2 can report many things in top-style,
-  it could also report the top-power-consuming processes.
+* pcp-htop as of PCP 6.1 can report anything in top-style, so
+  it can provide a nice overview of the top-power-consuming
+  provesses
 * Right now, we have overall system consumption of up to
   3 sources.  Combined with how much load single processes
   are causing, one can create derived metrics so express
