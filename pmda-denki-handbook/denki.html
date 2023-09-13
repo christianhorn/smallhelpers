@@ -854,15 +854,22 @@ other architectures like ARM, NVidia etc.</p>
 <p>Interface to read metrics from Kepler</p>
 </li>
 <li>
-<p><a href="https://fluxcoil.net/wiki/software/performance_co-pilot/pmda-denki#further_implementations">more ideas</a></p>
-</li>
-<li>
 <p>Apple has apparently directly ~20 power sensors directly
 on the AppleSilicon hardware.  As of 2023-09-11, these
 are not available, but will probably in the near future
 appear on Linux as sensor values.  These will likely
 appear in pmda-lmsensors without further efforts required.
 <a href="https://tpaste.us/pn7g">Apple silicon power sensors</a></p>
+</li>
+<li>
+<p>CPU flaws like Spectre/Meltdown, AMD Zenbleed, Intels
+Downfall get fixed in the Linux kernel and microcode.
+When running a workload on these, how much energy is the
+workload causing with and without the mitigation?
+pmda-denki can help to measure that.</p>
+</li>
+<li>
+<p><a href="https://fluxcoil.net/wiki/software/performance_co-pilot/pmda-denki#further_implementations">more ideas</a></p>
 </li>
 </ul>
 </div>
@@ -871,7 +878,7 @@ appear in pmda-lmsensors without further efforts required.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-09-11 14:45:01 +0900
+Last updated 2023-09-13 13:40:55 +0900
 </div>
 </div>
 </body>
