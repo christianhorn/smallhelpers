@@ -279,10 +279,15 @@ Possible features
 * Implementation of further sensors: counters from
   other architectures like ARM, NVidia etc.
 * Interface to read metrics from Kepler
-* link:https://fluxcoil.net/wiki/software/performance_co-pilot/pmda-denki#further_implementations[more ideas]
 * Apple has apparently directly ~20 power sensors directly
   on the AppleSilicon hardware.  As of 2023-09-11, these
   are not available, but will probably in the near future
   appear on Linux as sensor values.  These will likely
   appear in pmda-lmsensors without further efforts required.
   link:https://tpaste.us/pn7g[Apple silicon power sensors]
+* CPU flaws like Spectre/Meltdown, AMD Zenbleed, Intels
+  Downfall get fixed in the Linux kernel and microcode.
+  When running a workload on these, how much energy is the
+  workload causing with and without the mitigation?  
+  pmda-denki can help to measure that.
+* link:https://fluxcoil.net/wiki/software/performance_co-pilot/pmda-denki#further_implementations[more ideas]
