@@ -33,6 +33,8 @@
           - pcre-devel
           - openssl-libs
           - libcurl-devel
+          # rhel9 amd64 needs this for compiling
+          - redhat-rpm-config
         state: present
       when: (ansible_facts.os_family == 'RedHat') or
             (ansible_facts.os_family == 'Fedora')
