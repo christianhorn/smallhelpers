@@ -14,14 +14,14 @@ import re
 import sys
 import os.path
 
-host        = "steamdeck"      # The system under test
+host        = "rhel9u3a"      # The system under test
 hostrapl    = "kosmos"          # What device will provide RAPL values?
 hostbat     = "kosmos"          # What device will provide battery values?
 hosttasmota = "kosmos"      # What device will provide Tasmota values?
 
 userapl     = True
 usebat      = False
-usetasmota  = True
+usetasmota  = False
 
 starttime   = ""
 endtime     = ""
@@ -44,9 +44,12 @@ def ansitasmotaprep():
 
 def powerrapl():
     ''' Read counter: What's the raw value for the rapl counter? '''
-    command = "pmrep -h " + hostrapl + " denki.rapl.raw -i package-0 -H -s1"
+    # command = "pmrep -h " + hostrapl + " denki.rapl -i package-0 -H -s1"
+    command = "pminfo -h " + hostrapl + " -f denki.rapl | grep package-0"
     out = subprocess.check_output(command, shell=True)
-    return(int(out))
+    out2 = out.strip()
+    out3 = re.sub('.* ', '', out2.decode('UTF-8'))
+    return(int(out3))
 
 def powerbat():
     ''' Read counter: What's the current battery charge? '''
@@ -56,7 +59,7 @@ def powerbat():
 
 def liverapl():
     ''' Read gauge: live value of currently consumed power according to RAPL '''
-    command = "pmrep -h " + hostrapl + " denki.rapl.rate -i package-0 -H -s2|tail -1"
+    command = "pmrep -h " + hostrapl + " denki.rapl -i package-0 -H -s2|tail -1"
     out = subprocess.check_output(command, shell=True)
     out2 = out.decode('UTF-8')
     out3 = out2.replace("\n","")
@@ -145,17 +148,20 @@ def runjob():
 
 # main
 
-# ansiprep()
-# if usetasmota == True:
-#    ansitasmotaprep()
+# fetch httpd:
+# wget -O httpd-2.4.57.tar.bz2 http://archive.apache.org/dist/httpd/httpd-2.4.57.tar.bz2
+
+ansiprep()
+if usetasmota == True:
+    ansitasmotaprep()
 
 looptime = 100
 job = "job_sleep.sh"
-runjob()
+# runjob()
 
 looptime = 300
 job = "job_justload_4.sh"
-runjob()
+# runjob()
 
 looptime = 300
 job = "job_httpd_extract.sh"

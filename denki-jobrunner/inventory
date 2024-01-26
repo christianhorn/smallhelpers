@@ -22,6 +22,7 @@ rhel6u10
 rhel9u2a
 rhel8u7a
 rhel9u2b
+rhel9u3a
 fed38
 rhel8u5a
 rhel8u5b
@@ -30,3 +31,5 @@ deck
 kosmos
 dennou
 star64
+asahi
+arm93
