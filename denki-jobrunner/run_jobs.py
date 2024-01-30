@@ -14,13 +14,13 @@ import re
 import sys
 import os.path
 
-host        = "rhel9u3a"      # The system under test
-hostrapl    = "kosmos"          # What device will provide RAPL values?
-hostbat     = "kosmos"          # What device will provide battery values?
-hosttasmota = "kosmos"      # What device will provide Tasmota values?
+host        = "asahi"      # The system under test
+hostrapl    = "asahi"          # What device will provide RAPL values?
+hostbat     = "asahi"          # What device will provide battery values?
+hosttasmota = "asahi"      # What device will provide Tasmota values?
 
-userapl     = True
-usebat      = False
+userapl     = False
+usebat      = True
 usetasmota  = False
 
 starttime   = ""
@@ -44,7 +44,6 @@ def ansitasmotaprep():
 
 def powerrapl():
     ''' Read counter: What's the raw value for the rapl counter? '''
-    # command = "pmrep -h " + hostrapl + " denki.rapl -i package-0 -H -s1"
     command = "pminfo -h " + hostrapl + " -f denki.rapl | grep package-0"
     out = subprocess.check_output(command, shell=True)
     out2 = out.strip()
@@ -53,9 +52,11 @@ def powerrapl():
 
 def powerbat():
     ''' Read counter: What's the current battery charge? '''
-    command = "pmrep -h " + hostbat + " denki.bat.energy_now_raw -H -s1"
+    command = "pminfo -h " + hostrapl + " -f denki.bat.energy_now | grep battery-0"
     out = subprocess.check_output(command, shell=True)
-    return(float(out.strip()))
+    out2 = out.strip()
+    out3 = re.sub('.* ', '', out2.decode('UTF-8'))
+    return(float(out3.strip()))
 
 def liverapl():
     ''' Read gauge: live value of currently consumed power according to RAPL '''
@@ -151,22 +152,27 @@ def runjob():
 # fetch httpd:
 # wget -O httpd-2.4.57.tar.bz2 http://archive.apache.org/dist/httpd/httpd-2.4.57.tar.bz2
 
-ansiprep()
+# ansiprep()
 if usetasmota == True:
     ansitasmotaprep()
 
-looptime = 100
+# looptime = 300
+looptime = 900
 job = "job_sleep.sh"
-# runjob()
+runjob()
 
-looptime = 300
-job = "job_justload_4.sh"
-# runjob()
+# looptime = 300
+looptime = 900
+# job = "job_justload_4.sh"
+job = "job_justload_full.sh"
+runjob()
 
-looptime = 300
+# looptime = 600
+looptime = 900
 job = "job_httpd_extract.sh"
 runjob()
 
-looptime = 300
+# looptime = 300
+looptime = 900
 job = "job_httpd_compile.sh"
 runjob()

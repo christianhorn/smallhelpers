@@ -39,23 +39,6 @@
       when: (ansible_facts.os_family == 'RedHat') or
             (ansible_facts.os_family == 'Fedora')
 
-    - name: Ensure packages on Arch/steam deck
-      pacman:
-        name:
-          - apr-util
-          - gcc
-          - make
-          - flex
-          - bison
-          - pcre2
-          - brotli
-          - libldap
-          - libxcrypt
-          - linux-headers
-          - linux-api-headers
-        state: present
-      when: ansible_facts.os_family == 'Archlinux'
-
     - name: Ensure files are in place
       copy:
         src: "files/{{item}}"
@@ -66,6 +49,7 @@
         - job_httpd_extract.sh
         - job_sleep.sh
         - job_justload_4.sh
+        - job_justload_full.sh
 
     - name: Ensure job_* is executabls
       shell:
