@@ -1,0 +1,155 @@
+### Running  job_sleep.sh  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_sleep.sh 600"
+	Workload did run 1 times, with  1  threads.
+	Single jobs did run in average 601.0 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		4.72 W
+			Single job run, power consumption: 	0.78779 Wh
+		TasConsumedRP: own calculated power consumption in average: 		2.95 W
+			Single job run, power consumption: 	0.49250 Wh
+		TasConsumedAP: own calculated power consumption in average: 		5.00 W
+			Single job run, power consumption: 	0.83472 Wh
+		TasConsumedP: own calculated power consumption in average: 		4.02 W
+			Single job run, power consumption: 	0.67056 Wh
+	oneline star64 job_sleep.sh looptime-600 runs-1 threads-1 timeperjob-601.0  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-4.72-2.95-5.00-4.02  TasWattHourperrun-0.78779-0.49250-0.83472-0.67056
+### Running  job_httpd_extract_cpu.sh 1  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 1 600"
+	Workload did run 129 times, with  1  threads.
+	Single jobs did run in average 4.7 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		6.36 W
+			Single job run, power consumption: 	0.00827 Wh
+		TasConsumedRP: own calculated power consumption in average: 		3.91 W
+			Single job run, power consumption: 	0.00509 Wh
+		TasConsumedAP: own calculated power consumption in average: 		6.02 W
+			Single job run, power consumption: 	0.00783 Wh
+		TasConsumedP: own calculated power consumption in average: 		4.99 W
+			Single job run, power consumption: 	0.00649 Wh
+	oneline star64 job_httpd_extract_cpu.sh 1 looptime-600 runs-129 threads-1 timeperjob-4.7  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-6.36-3.91-6.02-4.99  TasWattHourperrun-0.00827-0.00509-0.00783-0.00649
+### Running  job_httpd_extract_cpu.sh 2  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 2 600"
+	Workload did run 210 times, with  2  threads.
+	Single jobs did run in average 5.8 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		6.82 W
+			Single job run, power consumption: 	0.01092 Wh
+		TasConsumedRP: own calculated power consumption in average: 		3.98 W
+			Single job run, power consumption: 	0.00638 Wh
+		TasConsumedAP: own calculated power consumption in average: 		6.98 W
+			Single job run, power consumption: 	0.01118 Wh
+		TasConsumedP: own calculated power consumption in average: 		5.99 W
+			Single job run, power consumption: 	0.00959 Wh
+	oneline star64 job_httpd_extract_cpu.sh 2 looptime-600 runs-210 threads-2 timeperjob-5.8  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-6.82-3.98-6.98-5.99  TasWattHourperrun-0.01092-0.00638-0.01118-0.00959
+### Running  job_httpd_extract_cpu.sh 3  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 3 600"
+	Workload did run 285 times, with  3  threads.
+	Single jobs did run in average 6.3 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		7.25 W
+			Single job run, power consumption: 	0.01276 Wh
+		TasConsumedRP: own calculated power consumption in average: 		3.99 W
+			Single job run, power consumption: 	0.00703 Wh
+		TasConsumedAP: own calculated power consumption in average: 		6.99 W
+			Single job run, power consumption: 	0.01231 Wh
+		TasConsumedP: own calculated power consumption in average: 		5.99 W
+			Single job run, power consumption: 	0.01055 Wh
+	oneline star64 job_httpd_extract_cpu.sh 3 looptime-600 runs-285 threads-3 timeperjob-6.3  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-7.25-3.99-6.99-5.99  TasWattHourperrun-0.01276-0.00703-0.01231-0.01055
+### Running  job_httpd_extract_cpu.sh 4  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 4 600"
+	Workload did run 360 times, with  4  threads.
+	Single jobs did run in average 6.7 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		7.57 W
+			Single job run, power consumption: 	0.01417 Wh
+		TasConsumedRP: own calculated power consumption in average: 		4.04 W
+			Single job run, power consumption: 	0.00756 Wh
+		TasConsumedAP: own calculated power consumption in average: 		7.89 W
+			Single job run, power consumption: 	0.01475 Wh
+		TasConsumedP: own calculated power consumption in average: 		6.07 W
+			Single job run, power consumption: 	0.01135 Wh
+	oneline star64 job_httpd_extract_cpu.sh 4 looptime-600 runs-360 threads-4 timeperjob-6.7  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-7.57-4.04-7.89-6.07  TasWattHourperrun-0.01417-0.00756-0.01475-0.01135
+### Running  job_httpd_extract_cpu.sh 5  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 5 600"
+	Workload did run 362 times, with  5  threads.
+	Single jobs did run in average 8.4 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		7.61 W
+			Single job run, power consumption: 	0.01767 Wh
+		TasConsumedRP: own calculated power consumption in average: 		4.05 W
+			Single job run, power consumption: 	0.00940 Wh
+		TasConsumedAP: own calculated power consumption in average: 		7.94 W
+			Single job run, power consumption: 	0.01844 Wh
+		TasConsumedP: own calculated power consumption in average: 		6.05 W
+			Single job run, power consumption: 	0.01404 Wh
+	oneline star64 job_httpd_extract_cpu.sh 5 looptime-600 runs-362 threads-5 timeperjob-8.4  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-7.61-4.05-7.94-6.05  TasWattHourperrun-0.01767-0.00940-0.01844-0.01404
+### Running  job_httpd_extract_cpu.sh 6  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 6 600"
+	Workload did run 359 times, with  6  threads.
+	Single jobs did run in average 10.1 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		7.61 W
+			Single job run, power consumption: 	0.02140 Wh
+		TasConsumedRP: own calculated power consumption in average: 		4.07 W
+			Single job run, power consumption: 	0.01146 Wh
+		TasConsumedAP: own calculated power consumption in average: 		7.93 W
+			Single job run, power consumption: 	0.02231 Wh
+		TasConsumedP: own calculated power consumption in average: 		6.03 W
+			Single job run, power consumption: 	0.01697 Wh
+	oneline star64 job_httpd_extract_cpu.sh 6 looptime-600 runs-359 threads-6 timeperjob-10.1  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-7.61-4.07-7.93-6.03  TasWattHourperrun-0.02140-0.01146-0.02231-0.01697
+### Running  job_httpd_extract_cpu.sh 7  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 7 600"
+	Workload did run 356 times, with  7  threads.
+	Single jobs did run in average 12.0 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		7.68 W
+			Single job run, power consumption: 	0.02551 Wh
+		TasConsumedRP: own calculated power consumption in average: 		4.23 W
+			Single job run, power consumption: 	0.01404 Wh
+		TasConsumedAP: own calculated power consumption in average: 		7.97 W
+			Single job run, power consumption: 	0.02646 Wh
+		TasConsumedP: own calculated power consumption in average: 		6.06 W
+			Single job run, power consumption: 	0.02012 Wh
+	oneline star64 job_httpd_extract_cpu.sh 7 looptime-600 runs-356 threads-7 timeperjob-12.0  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-7.68-4.23-7.97-6.06  TasWattHourperrun-0.02551-0.01404-0.02646-0.02012
+### Running  job_httpd_extract_cpu.sh 8  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 8 600"
+	Workload did run 352 times, with  8  threads.
+	Single jobs did run in average 13.9 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		7.63 W
+			Single job run, power consumption: 	0.02942 Wh
+		TasConsumedRP: own calculated power consumption in average: 		4.16 W
+			Single job run, power consumption: 	0.01605 Wh
+		TasConsumedAP: own calculated power consumption in average: 		7.92 W
+			Single job run, power consumption: 	0.03055 Wh
+		TasConsumedP: own calculated power consumption in average: 		6.13 W
+			Single job run, power consumption: 	0.02365 Wh
+	oneline star64 job_httpd_extract_cpu.sh 8 looptime-600 runs-352 threads-8 timeperjob-13.9  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-7.63-4.16-7.92-6.13  TasWattHourperrun-0.02942-0.01605-0.03055-0.02365
+### Running  job_httpd_extract_cpu.sh 10  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 10 600"
+	Workload did run 351 times, with  10  threads.
+	Single jobs did run in average 17.4 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		7.60 W
+			Single job run, power consumption: 	0.03662 Wh
+		TasConsumedRP: own calculated power consumption in average: 		4.03 W
+			Single job run, power consumption: 	0.01944 Wh
+		TasConsumedAP: own calculated power consumption in average: 		7.94 W
+			Single job run, power consumption: 	0.03828 Wh
+		TasConsumedP: own calculated power consumption in average: 		6.09 W
+			Single job run, power consumption: 	0.02935 Wh
+	oneline star64 job_httpd_extract_cpu.sh 10 looptime-600 runs-351 threads-10 timeperjob-17.4  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-7.60-4.03-7.94-6.09  TasWattHourperrun-0.03662-0.01944-0.03828-0.02935
+### Running  job_httpd_extract_cpu.sh 14  for  600 sec..
+	executing:  ssh -x chris@star64 "cd /dev/shm; ./job_httpd_extract_cpu.sh 14 600"
+	Workload did run 350 times, with  14  threads.
+	Single jobs did run in average 24.6 sec.
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		7.60 W
+			Single job run, power consumption: 	0.05187 Wh
+		TasConsumedRP: own calculated power consumption in average: 		4.06 W
+			Single job run, power consumption: 	0.02767 Wh
+		TasConsumedAP: own calculated power consumption in average: 		7.96 W
+			Single job run, power consumption: 	0.05431 Wh
+		TasConsumedP: own calculated power consumption in average: 		6.07 W
+			Single job run, power consumption: 	0.04138 Wh
+	oneline star64 job_httpd_extract_cpu.sh 14 looptime-600 runs-350 threads-14 timeperjob-24.6  raplconsumption-0.00 raplwatthourperrun-0.00000  batconsumed-0.00 batwatthourperrun-0.00000  TasConsumed-7.60-4.06-7.96-6.07  TasWattHourperrun-0.05187-0.02767-0.05431-0.04138
+

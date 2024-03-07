@@ -1,0 +1,133 @@
+### Running  job_sleep.sh  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_sleep.sh 600"
+	Workload did run 1 times, with  1  threads.
+	Single jobs did run in average 602.0 sec.
+	### RAPL
+		Average power consumption: 		1.77 W
+		Single job run, power consumption: 	0.29667 Wh
+	### Battery
+		Average power consumption: 		2.45 W
+		Single job run, power consumption: 	0.41000 Wh
+	oneline deck job_sleep.sh looptime-600 runs-1 threads-1 timeperjob-602.0  raplconsumption-1.77 raplwatthourperrun-0.29667  batconsumed-2.45 batwatthourperrun-0.41000  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 1  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 1 600"
+	Workload did run 509 times, with  1  threads.
+	Single jobs did run in average 1.2 sec.
+	### RAPL
+		Average power consumption: 		4.96 W
+		Single job run, power consumption: 	0.00163 Wh
+	### Battery
+		Average power consumption: 		8.43 W
+		Single job run, power consumption: 	0.00277 Wh
+	oneline deck job_httpd_extract_cpu.sh 1 looptime-600 runs-509 threads-1 timeperjob-1.2  raplconsumption-4.96 raplwatthourperrun-0.00163  batconsumed-8.43 batwatthourperrun-0.00277  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 2  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 2 600"
+	Workload did run 780 times, with  2  threads.
+	Single jobs did run in average 1.5 sec.
+	### RAPL
+		Average power consumption: 		7.58 W
+		Single job run, power consumption: 	0.00326 Wh
+	### Battery
+		Average power consumption: 		11.94 W
+		Single job run, power consumption: 	0.00513 Wh
+	oneline deck job_httpd_extract_cpu.sh 2 looptime-600 runs-780 threads-2 timeperjob-1.5  raplconsumption-7.58 raplwatthourperrun-0.00326  batconsumed-11.94 batwatthourperrun-0.00513  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 3  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 3 600"
+	Workload did run 918 times, with  3  threads.
+	Single jobs did run in average 2.0 sec.
+	### RAPL
+		Average power consumption: 		8.93 W
+		Single job run, power consumption: 	0.00489 Wh
+	### Battery
+		Average power consumption: 		14.57 W
+		Single job run, power consumption: 	0.00797 Wh
+	oneline deck job_httpd_extract_cpu.sh 3 looptime-600 runs-918 threads-3 timeperjob-2.0  raplconsumption-8.93 raplwatthourperrun-0.00489  batconsumed-14.57 batwatthourperrun-0.00797  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 4  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 4 600"
+	Workload did run 1057 times, with  4  threads.
+	Single jobs did run in average 2.3 sec.
+	### RAPL
+		Average power consumption: 		10.33 W
+		Single job run, power consumption: 	0.00655 Wh
+	### Battery
+		Average power consumption: 		17.25 W
+		Single job run, power consumption: 	0.01094 Wh
+	oneline deck job_httpd_extract_cpu.sh 4 looptime-600 runs-1057 threads-4 timeperjob-2.3  raplconsumption-10.33 raplwatthourperrun-0.00655  batconsumed-17.25 batwatthourperrun-0.01094  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 5  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 5 600"
+	Workload did run 1144 times, with  5  threads.
+	Single jobs did run in average 2.6 sec.
+	### RAPL
+		Average power consumption: 		10.68 W
+		Single job run, power consumption: 	0.00783 Wh
+	### Battery
+		Average power consumption: 		18.30 W
+		Single job run, power consumption: 	0.01342 Wh
+	oneline deck job_httpd_extract_cpu.sh 5 looptime-600 runs-1144 threads-5 timeperjob-2.6  raplconsumption-10.68 raplwatthourperrun-0.00783  batconsumed-18.30 batwatthourperrun-0.01342  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 6  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 6 600"
+	Workload did run 1243 times, with  6  threads.
+	Single jobs did run in average 2.9 sec.
+	### RAPL
+		Average power consumption: 		11.11 W
+		Single job run, power consumption: 	0.00898 Wh
+	### Battery
+		Average power consumption: 		19.70 W
+		Single job run, power consumption: 	0.01593 Wh
+	oneline deck job_httpd_extract_cpu.sh 6 looptime-600 runs-1243 threads-6 timeperjob-2.9  raplconsumption-11.11 raplwatthourperrun-0.00898  batconsumed-19.70 batwatthourperrun-0.01593  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 7  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 7 600"
+	Workload did run 1351 times, with  7  threads.
+	Single jobs did run in average 3.1 sec.
+	### RAPL
+		Average power consumption: 		11.56 W
+		Single job run, power consumption: 	0.01005 Wh
+	### Battery
+		Average power consumption: 		20.86 W
+		Single job run, power consumption: 	0.01813 Wh
+	oneline deck job_httpd_extract_cpu.sh 7 looptime-600 runs-1351 threads-7 timeperjob-3.1  raplconsumption-11.56 raplwatthourperrun-0.01005  batconsumed-20.86 batwatthourperrun-0.01813  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 8  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 8 600"
+	Workload did run 1461 times, with  8  threads.
+	Single jobs did run in average 3.3 sec.
+	### RAPL
+		Average power consumption: 		12.03 W
+		Single job run, power consumption: 	0.01105 Wh
+	### Battery
+		Average power consumption: 		22.29 W
+		Single job run, power consumption: 	0.02048 Wh
+	oneline deck job_httpd_extract_cpu.sh 8 looptime-600 runs-1461 threads-8 timeperjob-3.3  raplconsumption-12.03 raplwatthourperrun-0.01105  batconsumed-22.29 batwatthourperrun-0.02048  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 10  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 10 600"
+	Workload did run 1454 times, with  10  threads.
+	Single jobs did run in average 4.2 sec.
+	### RAPL
+		Average power consumption: 		-96.48 W
+		Single job run, power consumption: 	-0.11133 Wh
+	### Battery
+		Average power consumption: 		22.71 W
+		Single job run, power consumption: 	0.02620 Wh
+	oneline deck job_httpd_extract_cpu.sh 10 looptime-600 runs-1454 threads-10 timeperjob-4.2  raplconsumption--96.48 raplwatthourperrun--0.11133  batconsumed-22.71 batwatthourperrun-0.02620  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 12  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 12 600"
+	Workload did run 1447 times, with  12  threads.
+	Single jobs did run in average 5.0 sec.
+	### RAPL
+		Average power consumption: 		12.01 W
+		Single job run, power consumption: 	0.01674 Wh
+	### Battery
+		Average power consumption: 		22.97 W
+		Single job run, power consumption: 	0.03201 Wh
+	oneline deck job_httpd_extract_cpu.sh 12 looptime-600 runs-1447 threads-12 timeperjob-5.0  raplconsumption-12.01 raplwatthourperrun-0.01674  batconsumed-22.97 batwatthourperrun-0.03201  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+### Running  job_httpd_extract_cpu.sh 14  for  600 sec..
+	executing:  ssh -x chris@deck "cd /dev/shm; ./job_httpd_extract_cpu.sh 14 600"
+	Workload did run 1438 times, with  14  threads.
+	Single jobs did run in average 5.9 sec.
+	### RAPL
+		Average power consumption: 		11.97 W
+		Single job run, power consumption: 	0.01959 Wh
+	### Battery
+		Average power consumption: 		23.09 W
+		Single job run, power consumption: 	0.03777 Wh
+	oneline deck job_httpd_extract_cpu.sh 14 looptime-600 runs-1438 threads-14 timeperjob-5.9  raplconsumption-11.97 raplwatthourperrun-0.01959  batconsumed-23.09 batwatthourperrun-0.03777  TasConsumed-0.00-0.00-0.00-0.00  TasWattHourperrun-0.00000-0.00000-0.00000-0.00000
+

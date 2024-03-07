@@ -1,3 +1,7 @@
+#!/usr/bin/bash
+
+PREFIX="load"
+
 SLEEPTIME=$1
 echo -en "\tDoing load for $SLEEPTIME sec"
 
@@ -8,4 +12,6 @@ done
 
 sleep $SLEEPTIME
 killall md5sum
-echo $CPUS >/tmp/counter
+
+echo 1 >/tmp/counter
+echo $CPUS >/tmp/threads

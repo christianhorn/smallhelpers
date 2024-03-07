@@ -45,13 +45,12 @@
         dest: "/dev/shm/{{item}}"
       loop:
         - httpd-2.4.57.tar.bz2
-        - job_httpd_compile.sh
-        - job_httpd_extract.sh
         - job_sleep.sh
-        - job_justload_4.sh
         - job_justload_full.sh
+        - job_httpd_extract_cpu.sh
+        - job_httpd_compile_cpu.sh
 
-    - name: Ensure job_* is executabls
+    - name: Ensure job_* is executable
       shell:
         cmd: chmod +x /dev/shm/job*
 

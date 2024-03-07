@@ -1,0 +1,314 @@
+### Running  job_sleep.sh  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_sleep.sh 600"
+	Workload did run 1 times, with  1  threads.
+	Single jobs did run in average 600.0 sec.
+	### RAPL
+		Average power consumption: 		0.24 W
+		Single job run, power consumption: 	0.03972 Wh
+	### Battery
+		Average power consumption: 		1.56 W
+		Single job run, power consumption: 	0.26000 Wh
+	oneline dennou job_sleep.sh looptime-600 runs-1 threads-1 timeperjob-600.0  raplconsumption-0.24 raplwatthourperrun-0.03972  batconsumed-1.56 batwatthourperrun-0.26000
+### Running  job_httpd_extract_cpu.sh 1  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 1 600"
+	Workload did run 558 times, with  1  threads.
+	Single jobs did run in average 1.1 sec.
+	### RAPL
+		Average power consumption: 		10.23 W
+		Single job run, power consumption: 	0.00306 Wh
+	### Battery
+		Average power consumption: 		14.80 W
+		Single job run, power consumption: 	0.00443 Wh
+	oneline dennou job_httpd_extract_cpu.sh 1 looptime-600 runs-558 threads-1 timeperjob-1.1  raplconsumption-10.23 raplwatthourperrun-0.00306  batconsumed-14.80 batwatthourperrun-0.00443
+### Running  job_httpd_extract_cpu.sh 2  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 2 600"
+	Workload did run 931 times, with  2  threads.
+	Single jobs did run in average 1.3 sec.
+	### RAPL
+		Average power consumption: 		12.30 W
+		Single job run, power consumption: 	0.00441 Wh
+	### Battery
+		Average power consumption: 		17.73 W
+		Single job run, power consumption: 	0.00636 Wh
+	oneline dennou job_httpd_extract_cpu.sh 2 looptime-600 runs-931 threads-2 timeperjob-1.3  raplconsumption-12.30 raplwatthourperrun-0.00441  batconsumed-17.73 batwatthourperrun-0.00636
+### Running  job_httpd_extract_cpu.sh 3  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 3 600"
+	Workload did run 1082 times, with  3  threads.
+	Single jobs did run in average 1.7 sec.
+	### RAPL
+		Average power consumption: 		11.30 W
+		Single job run, power consumption: 	0.00523 Wh
+	### Battery
+		Average power consumption: 		16.35 W
+		Single job run, power consumption: 	0.00757 Wh
+	oneline dennou job_httpd_extract_cpu.sh 3 looptime-600 runs-1082 threads-3 timeperjob-1.7  raplconsumption-11.30 raplwatthourperrun-0.00523  batconsumed-16.35 batwatthourperrun-0.00757
+### Running  job_httpd_extract_cpu.sh 4  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 4 600"
+	Workload did run 1252 times, with  4  threads.
+	Single jobs did run in average 1.9 sec.
+	### RAPL
+		Average power consumption: 		11.79 W
+		Single job run, power consumption: 	0.00629 Wh
+	### Battery
+		Average power consumption: 		17.85 W
+		Single job run, power consumption: 	0.00952 Wh
+	oneline dennou job_httpd_extract_cpu.sh 4 looptime-600 runs-1252 threads-4 timeperjob-1.9  raplconsumption-11.79 raplwatthourperrun-0.00629  batconsumed-17.85 batwatthourperrun-0.00952
+### Running  job_httpd_extract_cpu.sh 5  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 5 600"
+	Workload did run 1204 times, with  5  threads.
+	Single jobs did run in average 2.5 sec.
+	### RAPL
+		Average power consumption: 		11.37 W
+		Single job run, power consumption: 	0.00789 Wh
+	### Battery
+		Average power consumption: 		17.64 W
+		Single job run, power consumption: 	0.01225 Wh
+	oneline dennou job_httpd_extract_cpu.sh 5 looptime-600 runs-1204 threads-5 timeperjob-2.5  raplconsumption-11.37 raplwatthourperrun-0.00789  batconsumed-17.64 batwatthourperrun-0.01225
+### Running  job_httpd_extract_cpu.sh 6  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 6 600"
+	Workload did run 1151 times, with  6  threads.
+	Single jobs did run in average 3.1 sec.
+	### RAPL
+		Average power consumption: 		11.05 W
+		Single job run, power consumption: 	0.00962 Wh
+	### Battery
+		Average power consumption: 		17.61 W
+		Single job run, power consumption: 	0.01533 Wh
+	oneline dennou job_httpd_extract_cpu.sh 6 looptime-600 runs-1151 threads-6 timeperjob-3.1  raplconsumption-11.05 raplwatthourperrun-0.00962  batconsumed-17.61 batwatthourperrun-0.01533
+### Running  job_httpd_extract_cpu.sh 7  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 7 600"
+	Workload did run 1093 times, with  7  threads.
+	Single jobs did run in average 3.9 sec.
+	### RAPL
+		Average power consumption: 		10.62 W
+		Single job run, power consumption: 	0.01137 Wh
+	### Battery
+		Average power consumption: 		17.40 W
+		Single job run, power consumption: 	0.01864 Wh
+	oneline dennou job_httpd_extract_cpu.sh 7 looptime-600 runs-1093 threads-7 timeperjob-3.9  raplconsumption-10.62 raplwatthourperrun-0.01137  batconsumed-17.40 batwatthourperrun-0.01864
+### Running  job_httpd_extract_cpu.sh 8  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 8 600"
+	Workload did run 1028 times, with  8  threads.
+	Single jobs did run in average 4.7 sec.
+	### RAPL
+		Average power consumption: 		9.98 W
+		Single job run, power consumption: 	0.01300 Wh
+	### Battery
+		Average power consumption: 		17.01 W
+		Single job run, power consumption: 	0.02218 Wh
+	oneline dennou job_httpd_extract_cpu.sh 8 looptime-600 runs-1028 threads-8 timeperjob-4.7  raplconsumption-9.98 raplwatthourperrun-0.01300  batconsumed-17.01 batwatthourperrun-0.02218
+### Running  job_httpd_extract_cpu.sh 10  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 10 600"
+	Workload did run 1020 times, with  10  threads.
+	Single jobs did run in average 5.9 sec.
+	### RAPL
+		Average power consumption: 		10.08 W
+		Single job run, power consumption: 	0.01655 Wh
+	### Battery
+		Average power consumption: 		16.78 W
+		Single job run, power consumption: 	0.02755 Wh
+	oneline dennou job_httpd_extract_cpu.sh 10 looptime-600 runs-1020 threads-10 timeperjob-5.9  raplconsumption-10.08 raplwatthourperrun-0.01655  batconsumed-16.78 batwatthourperrun-0.02755
+### Running  job_httpd_extract_cpu.sh 14  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 14 600"
+	Workload did run 1007 times, with  14  threads.
+	Single jobs did run in average 8.4 sec.
+	### RAPL
+		Average power consumption: 		9.93 W
+		Single job run, power consumption: 	0.02319 Wh
+	### Battery
+		Average power consumption: 		16.60 W
+		Single job run, power consumption: 	0.03879 Wh
+	oneline dennou job_httpd_extract_cpu.sh 14 looptime-600 runs-1007 threads-14 timeperjob-8.4  raplconsumption-9.93 raplwatthourperrun-0.02319  batconsumed-16.60 batwatthourperrun-0.03879
+
+
+
+
+
+### Running  job_sleep.sh  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_sleep.sh 600"
+	Workload did run 1 times, with  1  threads.
+	Single jobs did run in average 600.0 sec.
+	### RAPL
+		Average power consumption: 		0.35 W
+		Single job run, power consumption: 	0.05861 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		2.97 W
+			Single job run, power consumption: 	0.49469 Wh
+		TasConsumedRP: own calculated power consumption in average: 		2.06 W
+			Single job run, power consumption: 	0.34304 Wh
+		TasConsumedAP: own calculated power consumption in average: 		3.22 W
+			Single job run, power consumption: 	0.53605 Wh
+		TasConsumedP: own calculated power consumption in average: 		2.27 W
+			Single job run, power consumption: 	0.37770 Wh
+	oneline dennou job_sleep.sh looptime-600 runs-1 threads-1 timeperjob-600.0  raplconsumption-0.35 raplwatthourperrun-0.05861  TasConsumed-2.97-2.06-3.22-2.27  TasWattHourperrun-0.49469-0.34304-0.53605-0.37770
+### Running  job_httpd_extract_cpu.sh 1  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 1 600"
+	Workload did run 559 times, with  1  threads.
+	Single jobs did run in average 1.1 sec.
+	### RAPL
+		Average power consumption: 		10.18 W
+		Single job run, power consumption: 	0.00304 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		17.83 W
+			Single job run, power consumption: 	0.00533 Wh
+		TasConsumedRP: own calculated power consumption in average: 		7.53 W
+			Single job run, power consumption: 	0.00225 Wh
+		TasConsumedAP: own calculated power consumption in average: 		17.98 W
+			Single job run, power consumption: 	0.00537 Wh
+		TasConsumedP: own calculated power consumption in average: 		16.11 W
+			Single job run, power consumption: 	0.00481 Wh
+	oneline dennou job_httpd_extract_cpu.sh 1 looptime-600 runs-559 threads-1 timeperjob-1.1  raplconsumption-10.18 raplwatthourperrun-0.00304  TasConsumed-17.83-7.53-17.98-16.11  TasWattHourperrun-0.00533-0.00225-0.00537-0.00481
+### Running  job_httpd_extract_cpu.sh 2  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 2 600"
+	Workload did run 910 times, with  2  threads.
+	Single jobs did run in average 1.3 sec.
+	### RAPL
+		Average power consumption: 		11.90 W
+		Single job run, power consumption: 	0.00437 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		21.07 W
+			Single job run, power consumption: 	0.00773 Wh
+		TasConsumedRP: own calculated power consumption in average: 		8.85 W
+			Single job run, power consumption: 	0.00325 Wh
+		TasConsumedAP: own calculated power consumption in average: 		21.12 W
+			Single job run, power consumption: 	0.00775 Wh
+		TasConsumedP: own calculated power consumption in average: 		18.94 W
+			Single job run, power consumption: 	0.00695 Wh
+	oneline dennou job_httpd_extract_cpu.sh 2 looptime-600 runs-910 threads-2 timeperjob-1.3  raplconsumption-11.90 raplwatthourperrun-0.00437  TasConsumed-21.07-8.85-21.12-18.94  TasWattHourperrun-0.00773-0.00325-0.00775-0.00695
+### Running  job_httpd_extract_cpu.sh 3  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 3 600"
+	Workload did run 1081 times, with  3  threads.
+	Single jobs did run in average 1.7 sec.
+	### RAPL
+		Average power consumption: 		11.35 W
+		Single job run, power consumption: 	0.00526 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		20.96 W
+			Single job run, power consumption: 	0.00971 Wh
+		TasConsumedRP: own calculated power consumption in average: 		8.44 W
+			Single job run, power consumption: 	0.00391 Wh
+		TasConsumedAP: own calculated power consumption in average: 		20.92 W
+			Single job run, power consumption: 	0.00969 Wh
+		TasConsumedP: own calculated power consumption in average: 		18.49 W
+			Single job run, power consumption: 	0.00857 Wh
+	oneline dennou job_httpd_extract_cpu.sh 3 looptime-600 runs-1081 threads-3 timeperjob-1.7  raplconsumption-11.35 raplwatthourperrun-0.00526  TasConsumed-20.96-8.44-20.92-18.49  TasWattHourperrun-0.00971-0.00391-0.00969-0.00857
+### Running  job_httpd_extract_cpu.sh 4  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 4 600"
+	Workload did run 1253 times, with  4  threads.
+	Single jobs did run in average 1.9 sec.
+	### RAPL
+		Average power consumption: 		11.80 W
+		Single job run, power consumption: 	0.00629 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		21.95 W
+			Single job run, power consumption: 	0.01170 Wh
+		TasConsumedRP: own calculated power consumption in average: 		9.50 W
+			Single job run, power consumption: 	0.00506 Wh
+		TasConsumedAP: own calculated power consumption in average: 		21.96 W
+			Single job run, power consumption: 	0.01171 Wh
+		TasConsumedP: own calculated power consumption in average: 		19.75 W
+			Single job run, power consumption: 	0.01053 Wh
+	oneline dennou job_httpd_extract_cpu.sh 4 looptime-600 runs-1253 threads-4 timeperjob-1.9  raplconsumption-11.80 raplwatthourperrun-0.00629  TasConsumed-21.95-9.50-21.96-19.75  TasWattHourperrun-0.01170-0.00506-0.01171-0.01053
+### Running  job_httpd_extract_cpu.sh 5  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 5 600"
+	Workload did run 1201 times, with  5  threads.
+	Single jobs did run in average 2.5 sec.
+	### RAPL
+		Average power consumption: 		11.48 W
+		Single job run, power consumption: 	0.00798 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		21.35 W
+			Single job run, power consumption: 	0.01484 Wh
+		TasConsumedRP: own calculated power consumption in average: 		8.83 W
+			Single job run, power consumption: 	0.00614 Wh
+		TasConsumedAP: own calculated power consumption in average: 		21.35 W
+			Single job run, power consumption: 	0.01484 Wh
+		TasConsumedP: own calculated power consumption in average: 		19.45 W
+			Single job run, power consumption: 	0.01352 Wh
+	oneline dennou job_httpd_extract_cpu.sh 5 looptime-600 runs-1201 threads-5 timeperjob-2.5  raplconsumption-11.48 raplwatthourperrun-0.00798  TasConsumed-21.35-8.83-21.35-19.45  TasWattHourperrun-0.01484-0.00614-0.01484-0.01352
+### Running  job_httpd_extract_cpu.sh 6  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 6 600"
+	Workload did run 1151 times, with  6  threads.
+	Single jobs did run in average 3.1 sec.
+	### RAPL
+		Average power consumption: 		11.14 W
+		Single job run, power consumption: 	0.00971 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		20.89 W
+			Single job run, power consumption: 	0.01821 Wh
+		TasConsumedRP: own calculated power consumption in average: 		8.44 W
+			Single job run, power consumption: 	0.00736 Wh
+		TasConsumedAP: own calculated power consumption in average: 		20.91 W
+			Single job run, power consumption: 	0.01823 Wh
+		TasConsumedP: own calculated power consumption in average: 		19.05 W
+			Single job run, power consumption: 	0.01661 Wh
+	oneline dennou job_httpd_extract_cpu.sh 6 looptime-600 runs-1151 threads-6 timeperjob-3.1  raplconsumption-11.14 raplwatthourperrun-0.00971  TasConsumed-20.89-8.44-20.91-19.05  TasWattHourperrun-0.01821-0.00736-0.01823-0.01661
+### Running  job_httpd_extract_cpu.sh 7  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 7 600"
+	Workload did run 1090 times, with  7  threads.
+	Single jobs did run in average 3.9 sec.
+	### RAPL
+		Average power consumption: 		10.70 W
+		Single job run, power consumption: 	0.01149 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		20.50 W
+			Single job run, power consumption: 	0.02202 Wh
+		TasConsumedRP: own calculated power consumption in average: 		8.85 W
+			Single job run, power consumption: 	0.00950 Wh
+		TasConsumedAP: own calculated power consumption in average: 		20.54 W
+			Single job run, power consumption: 	0.02206 Wh
+		TasConsumedP: own calculated power consumption in average: 		18.38 W
+			Single job run, power consumption: 	0.01974 Wh
+	oneline dennou job_httpd_extract_cpu.sh 7 looptime-600 runs-1090 threads-7 timeperjob-3.9  raplconsumption-10.70 raplwatthourperrun-0.01149  TasConsumed-20.50-8.85-20.54-18.38  TasWattHourperrun-0.02202-0.00950-0.02206-0.01974
+### Running  job_httpd_extract_cpu.sh 8  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 8 600"
+	Workload did run 1028 times, with  8  threads.
+	Single jobs did run in average 4.7 sec.
+	### RAPL
+		Average power consumption: 		10.18 W
+		Single job run, power consumption: 	0.01323 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		19.93 W
+			Single job run, power consumption: 	0.02590 Wh
+		TasConsumedRP: own calculated power consumption in average: 		8.86 W
+			Single job run, power consumption: 	0.01152 Wh
+		TasConsumedAP: own calculated power consumption in average: 		19.94 W
+			Single job run, power consumption: 	0.02591 Wh
+		TasConsumedP: own calculated power consumption in average: 		17.86 W
+			Single job run, power consumption: 	0.02320 Wh
+	oneline dennou job_httpd_extract_cpu.sh 8 looptime-600 runs-1028 threads-8 timeperjob-4.7  raplconsumption-10.18 raplwatthourperrun-0.01323  TasConsumed-19.93-8.86-19.94-17.86  TasWattHourperrun-0.02590-0.01152-0.02591-0.02320
+### Running  job_httpd_extract_cpu.sh 10  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 10 600"
+	Workload did run 1018 times, with  10  threads.
+	Single jobs did run in average 5.9 sec.
+	### RAPL
+		Average power consumption: 		10.13 W
+		Single job run, power consumption: 	0.01666 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		19.96 W
+			Single job run, power consumption: 	0.03283 Wh
+		TasConsumedRP: own calculated power consumption in average: 		8.89 W
+			Single job run, power consumption: 	0.01463 Wh
+		TasConsumedAP: own calculated power consumption in average: 		20.00 W
+			Single job run, power consumption: 	0.03291 Wh
+		TasConsumedP: own calculated power consumption in average: 		17.85 W
+			Single job run, power consumption: 	0.02937 Wh
+	oneline dennou job_httpd_extract_cpu.sh 10 looptime-600 runs-1018 threads-10 timeperjob-5.9  raplconsumption-10.13 raplwatthourperrun-0.01666  TasConsumed-19.96-8.89-20.00-17.85  TasWattHourperrun-0.03283-0.01463-0.03291-0.02937
+### Running  job_httpd_extract_cpu.sh 14  for  600 sec..
+	executing:  ssh -x chris@dennou "cd /dev/shm; ./job_httpd_extract_cpu.sh 14 600"
+	Workload did run 1004 times, with  14  threads.
+	Single jobs did run in average 8.4 sec.
+	### RAPL
+		Average power consumption: 		10.04 W
+		Single job run, power consumption: 	0.02352 Wh
+	### Tasmota
+		TasConsumedOwn: own calculated power consumption in average: 		19.44 W
+			Single job run, power consumption: 	0.04556 Wh
+		TasConsumedRP: own calculated power consumption in average: 		8.51 W
+			Single job run, power consumption: 	0.01994 Wh
+		TasConsumedAP: own calculated power consumption in average: 		19.44 W
+			Single job run, power consumption: 	0.04556 Wh
+		TasConsumedP: own calculated power consumption in average: 		17.41 W
+			Single job run, power consumption: 	0.04080 Wh
+	oneline dennou job_httpd_extract_cpu.sh 14 looptime-600 runs-1004 threads-14 timeperjob-8.4  raplconsumption-10.04 raplwatthourperrun-0.02352  TasConsumed-19.44-8.51-19.44-17.41  TasWattHourperrun-0.04556-0.01994-0.04556-0.04080
+
