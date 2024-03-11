@@ -122,7 +122,7 @@ def runjob():
         print("\t### RAPL")
         raplconsumed = ( endrapl - startrapl ) / runtime
         print("\t\tAverage power consumption: \t\t%.2f" % raplconsumed,"W")
-        raplwatthourperrun = raplconsumed * timeperjob / 3600
+        raplwatthourperrun = raplconsumed / ( 3600 * int(runs) / runtime )
         print("\t\tSingle job run, power consumption: \t%.5f" % raplwatthourperrun,"Wh")
 
     if UseBat == True:
@@ -135,7 +135,7 @@ def runjob():
             batconsumed = ( startbat - endbat ) * ( 3600 / runtime )
 
             print("\t\tAverage power consumption: \t\t%.2f" % batconsumed,"W")
-            batwatthourperrun = batconsumed * timeperjob / 3600
+            batwatthourperrun = batconsumed / ( 3600 * int(runs) / runtime )
             print("\t\tSingle job run, power consumption: \t%.5f" % batwatthourperrun,"Wh")
 
     if UseTasmota == True:
@@ -162,7 +162,7 @@ def runjob():
                 counter += float(outleft) * float(outright)
                 validlines += 1
         TasConsumedOwn = counter / validlines
-        TasWattHourperrunOwn = TasConsumedOwn * timeperjob / 3600
+        TasWattHourperrunOwn = TasConsumedOwn / ( 3600 * int(runs) / runtime )
         print("\t\tTasConsumedOwn: own calculated power consumption in average: \t\t%.2f" % TasConsumedOwn,"W")
         print("\t\t\tSingle job run, power consumption: \t%.5f" % TasWattHourperrunOwn,"Wh")
 
@@ -179,7 +179,7 @@ def runjob():
                 counter += float(out)
                 validlines += 1
         TasConsumedRP = counter / validlines
-        TasWattHourperrunRP = TasConsumedRP * timeperjob / 3600
+        TasWattHourperrunRP = TasConsumedRP / ( 3600 * int(runs) / runtime )
         print("\t\tTasConsumedRP: own calculated power consumption in average: \t\t%.2f" % TasConsumedRP,"W")
         print("\t\t\tSingle job run, power consumption: \t%.5f" % TasWattHourperrunRP,"Wh")
 
@@ -196,7 +196,7 @@ def runjob():
                 counter += float(out)
                 validlines += 1
         TasConsumedAP = counter / validlines
-        TasWattHourperrunAP = TasConsumedAP * timeperjob / 3600
+        TasWattHourperrunAP = TasConsumedAP / ( 3600 * int(runs) / runtime )
         print("\t\tTasConsumedAP: own calculated power consumption in average: \t\t%.2f" % TasConsumedAP,"W")
         print("\t\t\tSingle job run, power consumption: \t%.5f" % TasWattHourperrunAP,"Wh")
 
@@ -213,7 +213,7 @@ def runjob():
                 counter += float(out)
                 validlines += 1
         TasConsumedP = counter / validlines
-        TasWattHourperrunP = TasConsumedP * timeperjob / 3600
+        TasWattHourperrunP = TasConsumedP / ( 3600 * int(runs) / runtime )
         print("\t\tTasConsumedP: own calculated power consumption in average: \t\t%.2f" % TasConsumedP,"W")
         print("\t\t\tSingle job run, power consumption: \t%.5f" % TasWattHourperrunP,"Wh")
 
