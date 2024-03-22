@@ -457,6 +457,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_future">4. Future</a></li>
+<li><a href="#_appendix">5. Appendix</a>
+<ul class="sectlevel2">
+<li><a href="#_implemented_and_potential_future_metric_sources">5.1. Implemented and potential future metric sources</a></li>
+<li><a href="#_stack_of_further_ideas_for_denkirunner_job">5.2. Stack of further ideas for denkirunner-job</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -875,10 +881,110 @@ pmda-denki can help to measure that.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_appendix">5. Appendix</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_implemented_and_potential_future_metric_sources">5.1. Implemented and potential future metric sources</h3>
+<div class="sect3">
+<h4 id="_power_delivery_unit_pdu_or_smart_plug_based">5.1.1. Power Delivery Unit (PDU) or smart plug based</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Billerica COLO Devices, via
+<a href="https://opendev.org/openstack/sushy">link</a></p>
+</li>
+<li>
+<p>HPE ilo: implemented via
+<a href="https://github.com/HewlettPackard/python-ilorest-library">python-ilorest-library</a></p>
+</li>
+<li>
+<p>Tasmota firmware smart plug, also in this area</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_bmc_based">5.1.2. BMC based</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Redfish: new, promising, well documented. Required
+options different between redfish protocol versions</p>
+</li>
+<li>
+<p>ipmitool: needs different parameters for every server,
+thus implementing would need kind if a database or
+heuristics?</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_processor_based_vendor_specific_intel_rapl_amd_apm">5.1.3. Processor based: vendor specific (Intel RAPL, AMD APM, ..)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>RAPL: x86 only. Right now, pmda-denki only supports
+sysfs, but msr mode might provide further metrics</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_bios_acpi">5.1.4. BIOS ACPI</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>acpi_power_meter kernel module and HWMON
+<a href="https://docs.kernel.org/hwmon/sysfs-interface.html">sysfs-interface</a></p>
+</li>
+<li>
+<p>Implements sensor reading support for the power meters
+exposed in the ACPI 4.0 spec, populates directory /sys/class/hwmon</p>
+</li>
+<li>
+<p>BIOS&#8217;s ACPI data is rather unlikely to change while
+the kernel is running.  Can be accessed by
+lm-sensor tool, or Prometheus host agent</p>
+</li>
+<li>
+<p>implementation via ACPI has
+<a href="https://utcc.utoronto.ca/~cks/space/blog/linux/ACPIFlawedPowerMonitoring">flaws</a></p>
+</li>
+<li>
+<p>AppleSilicon Asahi: hardware supports many single power
+sensors, research how to access from Linux</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stack_of_further_ideas_for_denkirunner_job">5.2. Stack of further ideas for denkirunner-job</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Implement monitoring of the clockspeed of the cpu cores.
+Would show when Intel Turboboost strikes in, and how
+AppleSilicon cores are tunes up/down (the 10core M2
+Macbook has LITTLE.big cores).  Should allow to show
+how energy efficient low/high spec cores are.</p>
+</li>
+<li>
+<p>Right now, only pattern "run single jobs in a loop
+for time X, i.e. 15min" is supported.  Alternatively,
+"run job Z exactly one time" could be interesting.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-09-13 13:40:55 +0900
+Last updated 2024-03-22 17:58:04 +0900
 </div>
 </div>
 </body>

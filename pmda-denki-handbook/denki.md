@@ -291,3 +291,48 @@ Possible features
   workload causing with and without the mitigation?  
   pmda-denki can help to measure that.
 * link:https://fluxcoil.net/wiki/software/performance_co-pilot/pmda-denki#further_implementations[more ideas]
+
+== Appendix
+=== Implemented and potential future metric sources
+
+==== Power Delivery Unit (PDU) or smart plug based
+  * Billerica COLO Devices, via 
+    link:https://opendev.org/openstack/sushy[link]
+  * HPE ilo: implemented via
+    link:https://github.com/HewlettPackard/python-ilorest-library[python-ilorest-library]
+  * Tasmota firmware smart plug, also in this area
+
+==== BMC based
+  * Redfish: new, promising, well documented. Required 
+    options different between redfish protocol versions
+  * ipmitool: needs different parameters for every server,
+    thus implementing would need kind if a database or
+    heuristics?
+
+==== Processor based: vendor specific (Intel RAPL, AMD APM, ..)
+  * RAPL: x86 only. Right now, pmda-denki only supports
+    sysfs, but msr mode might provide further metrics
+
+==== BIOS ACPI
+  * acpi_power_meter kernel module and HWMON 
+    link:https://docs.kernel.org/hwmon/sysfs-interface.html[sysfs-interface]
+  * Implements sensor reading support for the power meters 
+    exposed in the ACPI 4.0 spec, populates directory /sys/class/hwmon
+  * BIOS's ACPI data is rather unlikely to change while 
+    the kernel is running.  Can be accessed by
+    lm-sensor tool, or Prometheus host agent
+  * implementation via ACPI has
+    link:https://utcc.utoronto.ca/~cks/space/blog/linux/ACPIFlawedPowerMonitoring[flaws]
+  * AppleSilicon Asahi: hardware supports many single power
+    sensors, research how to access from Linux
+
+=== Stack of further ideas for denkirunner-job
+
+* Implement monitoring of the clockspeed of the cpu cores.
+  Would show when Intel Turboboost strikes in, and how
+  AppleSilicon cores are tunes up/down (the 10core M2
+  Macbook has LITTLE.big cores).  Should allow to show
+  how energy efficient low/high spec cores are.
+* Right now, only pattern "run single jobs in a loop
+  for time X, i.e. 15min" is supported.  Alternatively,
+  "run job Z exactly one time" could be interesting.
