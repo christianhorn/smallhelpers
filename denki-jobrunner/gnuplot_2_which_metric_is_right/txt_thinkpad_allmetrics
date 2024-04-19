@@ -1,0 +1,43 @@
+# looptime runs threads timeperjob raplconsumption raplwatthourperrun batconsumed batwatthourperrun 
+
+set xlabel 'Threads'
+set xrange [0:15]
+set key bottom right 
+
+set style line 1 linecolor rgb '#de181f' linetype 1  # Red
+set style line 2 linecolor rgb '#0060ae' linetype 1  # Blue
+set style line 3 linecolor rgb '#228C22' linetype 1  # Forest green
+
+set style line 4 linecolor rgb '#18ded7' linetype 1  # opposite Red
+set style line 5 linecolor rgb '#ae4e00' linetype 1  # opposite Blue
+set style line 6 linecolor rgb '#8c228c' linetype 1  # opposite Forest green
+
+
+set ylabel 'consumption in Watt'
+set title 'Thinkpad, total consumption, various metrics'
+
+set terminal png size 600,450 enhanced font "/usr/share/fonts/open-sans/OpenSans-Bold.ttf" dashlength 2; set termoption linewidth2 
+# old style
+# set terminal png size 1200,600 enhanced font "Helvetica,20"
+
+set output 'thinkpad_consumption_as_reported_by_various_metrics2.png'
+plot 'sorted_dennou_600_bat' u 3:5 title 'rapl' w linespoints linewidth 3, \
+	'sorted_dennou_600_bat' u 3:7 title 'battery' w linespoints linewidth 3, \
+	'sorted_dennou_600_tas' u 3:7 title 'Current * Voltage' w linespoints linewidth 3, \
+	'sorted_dennou_600_tas' u 3:8 title 'ReactivePower' w linespoints linewidth 3, \
+	'sorted_dennou_600_tas' u 3:9 title 'ApparentPower' w linespoints linewidth 3, \
+	'sorted_dennou_600_tas' u 3:10 title 'Power' w linespoints linewidth 3
+
+set ylabel 'Watt'
+set title 'Delta from battery metrics'
+set key at 15,-5.5,3
+set output "thinkpad_battery_metric_delta2.png"
+
+plot 'sorted_dennou_600_combined' u 3:($5 - $6) title 'delta rapl/batt' w linespoints linewidth 3, \
+	'sorted_dennou_600_combined' u 3:($6 - $6) title 'battery' w linespoints linewidth 3, \
+	'sorted_dennou_600_combined' u 3:($7 - $6) title 'delta Current * Voltage/batt' w linespoints linewidth 3, \
+	'sorted_dennou_600_combined' u 3:($8 - $6) title 'delta ReactivePower/batt' w linespoints linewidth 3, \
+	'sorted_dennou_600_combined' u 3:($9 - $6) title 'delta ApparentPower/batt' w linespoints linewidth 3, \
+	'sorted_dennou_600_combined' u 3:($10 - $6) title 'delta Power/batt' w linespoints linewidth 3
+
+# convert +append thinkpad_con*2.png thinkpad_bat*2.png think_powermetrics2.png

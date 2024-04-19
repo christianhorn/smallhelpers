@@ -1,0 +1,6 @@
+grep oneline ../out_dennou_600 |grep 'job_httpd_extract_cpu' | egrep -v 'File' | \
+        sed -e 's,.*looptime-,,' -e 's,runs-,\t,'  -e 's,threads-,\t,' -e 's,timeperjob-,\t,' \
+        -e 's,raplconsumption-,\t,' -e 's,raplwatthourperrun-,\t,' -e 's,batconsumed-,\t,' \
+        -e 's,batwatthourperrun-,\t,' -e 's,consumed-,\t,' -e 's,watthourperrun-,\t,' \
+        -e 's,TasConsumed-,\t,' -e 's,TasWattHourperrun-,\t,' -e 's,-, ,g' >sorted_dennou_600
+

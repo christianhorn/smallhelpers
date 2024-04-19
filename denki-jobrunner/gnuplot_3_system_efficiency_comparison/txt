@@ -1,0 +1,48 @@
+# looptime runs threads timeperjob raplconsumption raplwatthourperrun batconsumed batwatthourperrun 
+
+set xlabel 'Threads'
+set xrange [0:15]
+set key right top
+
+set style line 1 linecolor rgb '#de181f' linetype 1  # Red
+set style line 2 linecolor rgb '#0060ae' linetype 1  # Blue
+set style line 3 linecolor rgb '#228C22' linetype 1  # Forest green
+
+set style line 4 linecolor rgb '#18ded7' linetype 1  # opposite Red
+set style line 5 linecolor rgb '#ae4e00' linetype 1  # opposite Blue
+set style line 6 linecolor rgb '#8c228c' linetype 1  # opposite Forest green
+
+set ylabel 'WattHours'
+set title 'Energy consumption per single extract job'
+
+set terminal png size 1600,700 enhanced font "/usr/share/fonts/open-sans/OpenSans-Bold.ttf,20" dashlength 2; set termoption linewidth 3
+# old style:
+# set terminal png size 1600,600 enhanced font "Helvetica,20"
+set output "gnuplot_3_1_consumption_per_job3.png"
+
+plot 'sorted_dennou_600_bat' u 3:($7/(3600*$2/$1)) title 'Thinkpad L480 (AMD64)' w linespoints linewidth 3, \
+	'sorted_asahi_300' u 3:($7/(3600*$2/$1)) title 'Macbook/Fedora (aarch64)' w linespoints linewidth 3, \
+	'sorted_deck_600' u 3:($7/(3600*$2/$1)) title 'Steamdeck (AMD64)' w linespoints linewidth 3, \
+	'sorted_pi4_600' u 3:($12/(3600*$2/$1)) title 'Raspberry Pi 4 (ARM)' w linespoints linewidth 3, \
+	'sorted_star64_600' u 3:($12/(3600*$2/$1)) title 'Star64 (RISC-V)' w linespoints linewidth 3
+
+set key left top
+set title 'Total power draw'
+set ylabel 'Volt-ampere (VA)'
+set terminal png size 1600,800 enhanced font "/usr/share/fonts/open-sans/OpenSans-Bold.ttf,20" dashlength 2; set termoption linewidth 3
+set output "gnuplot_3_2_total_power_draw3.png"
+plot 'sorted_dennou_600_bat' u 3:7 title 'Thinkpad L480 (AMD64)' w linespoints linewidth 3, \
+	'sorted_asahi_300' u 3:7 title 'Macbook/Fedora (aarch64)' w linespoints linewidth 3, \
+	'sorted_deck_600' u 3:7 title 'Steamdeck (AMD64)' w linespoints linewidth 3, \
+	'sorted_pi4_600' u 3:12 title 'Raspberry Pi 4 (ARM)' w linespoints linewidth 3, \
+	'sorted_star64_600' u 3:12 title 'Star64 (RISC-V)' w linespoints linewidth 3
+
+set title 'Total extraction jobs per second'
+set ylabel 'jobs/second'
+set terminal png size 2200,900 enhanced font "/usr/share/fonts/open-sans/OpenSans-Bold.ttf,30" dashlength 2; set termoption linewidth 3
+set output "gnuplot_3_3_extracts_per_second2.png"
+plot 'sorted_dennou_600_bat' u 3:($2/600) title 'Thinkpad L480 (AMD64)' w linespoints linewidth 3, \
+	'sorted_asahi_300' u 3:($2/300) title 'Macbook/Fedora (aarch64)' w linespoints linewidth 3, \
+	'sorted_deck_600' u 3:($2/600) title 'Steamdeck (AMD64)' w linespoints linewidth 3, \
+	'sorted_pi4_600' u 3:($2/600) title 'Raspberry Pi 4 (ARM)' w linespoints linewidth 3, \
+	'sorted_star64_600' u 3:($2/600) title 'Star64 (RISC-V)' w linespoints linewidth 3

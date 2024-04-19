@@ -1,0 +1,42 @@
+# sorting
+cat deck |sed -e 's,.*looptime-,,' -e 's,runs-,\t,'  -e 's,threads-4 ,,' \
+	-e 's,timeperjob-,\t,' -e 's,raplconsumption-,\t,' -e 's,raplwatthourperrun-,\t,' \
+	-e 's,batconsumed-,\t,' -e 's,batwatthourperrun-,\t,' | sort -n >deck_sorted
+
+
+
+
+set title 'Job length comparison'                       # plot title
+set xlabel 'Seconds per job run'                 # x-axis label
+set ylabel 'Power in W'                          # y-axis label
+
+set yrange [0:25]
+set xrange [0:62]
+set key right bottom
+
+set terminal png size 1200,600 enhanced font "Helvetica,20"
+set output "deck_sorted.png"
+
+plot \
+	'deck_sorted' u 1:4 title 'metrics reported by RAPL' w p pointtype 2 pointsize 2, \
+	'deck_sorted' u 1:6 title 'metrics reported by battery' w p pointtype 2 pointsize 2
+
+# scp deck_sorted.png fc:/opt/web/blogtest/content/posts/2024/02/better-performance-less-consumption-on-linux/
+
+# new variant
+
+set style line 1 linecolor rgb '#de181f' linetype 1  # Red
+set style line 2 linecolor rgb '#0060ae' linetype 1  # Blue
+set style line 3 linecolor rgb '#228C22' linetype 1  # Forest green
+
+set style line 4 linecolor rgb '#18ded7' linetype 1  # opposite Red
+set style line 5 linecolor rgb '#ae4e00' linetype 1  # opposite Blue
+set style line 6 linecolor rgb '#8c228c' linetype 1  # opposite Forest green
+
+set terminal png size 1600,700 enhanced font "/usr/share/fonts/open-sans/OpenSans-Bold.ttf,20" dashlength 2; set termoption linewidth 3
+
+set output "deck_sorted3.png"
+
+plot \
+	'deck_sorted' u 1:4 title 'metrics reported by RAPL' w p pointtype 2 pointsize 2, \
+	'deck_sorted' u 1:6 title 'metrics reported by battery' w p pointtype 6 pointsize 2

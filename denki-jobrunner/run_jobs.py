@@ -245,16 +245,27 @@ job = "job_justload_full.sh"
 
 looptime = 300
 job = "job_httpd_extract_cpu.sh 1"
+runjob()
 job = "job_httpd_extract_cpu.sh 2"
+runjob()
 job = "job_httpd_extract_cpu.sh 3"
+runjob()
 job = "job_httpd_extract_cpu.sh 4"
+runjob()
 job = "job_httpd_extract_cpu.sh 5"
+runjob()
 job = "job_httpd_extract_cpu.sh 6"
+runjob()
 job = "job_httpd_extract_cpu.sh 7"
+runjob()
 job = "job_httpd_extract_cpu.sh 8"
+runjob()
 job = "job_httpd_extract_cpu.sh 10"
-job = "job_httpd_extract_cpu.sh 12"
+runjob()
 job = "job_httpd_extract_cpu.sh 14"
+runjob()
+job = "job_httpd_extract_cpu.sh 12"
+runjob()
 job = "job_httpd_extract_cpu.sh 13"
 runjob()
 #for i in range(20):
