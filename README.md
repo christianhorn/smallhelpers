@@ -1,5 +1,3 @@
-# smallhelpers
-
 ## What's this?
 
 Helper scripts.
