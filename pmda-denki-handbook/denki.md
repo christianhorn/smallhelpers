@@ -46,14 +46,25 @@ but not as accurate as what I ended up with.
 
 === Related software
 
-* link:https://next.redhat.com/2023/08/22/introducing-kepler-efficient-power-monitoring-for-kubernetes/[Kepler:]
-  power stats collection, having containers in mind and uses
-  AI to understand how much is consumed by single containers/pods.
-  Can shift workloads based on criteria ("this area has currently
-  sun and solar energy, let's move loads here")
+* 2007: link:https://en.wikipedia.org/wiki/PowerTOP[powertop],
+  default tool on x86 to see live power metrics, to optimize.
+  No abstraction into library, no historical metrics.
+* 2021: link:https://github.com/performancecopilot/pcp/[pmda-denki],
+  PCP power consumption metrics.  Name appeared first at
+  link:https://pcp.io/papers/lmsensors.20190308.pdf[pcp conf 2019].
+  Via PCP we get historical recording, live monitoring, warnings
+  (PMIE), visualization via redis/Grafana, anomaly detection.  pmda-denki
+  is now part of RHEL8 and 9.
+* 2022 (?): link:https://github.com/sustainable-computing-io/kepler[Kepler],
+  heavy duty, Red Hat/IBM seeded and sponsored.  Kepler is reading
+  consumption metrics, taking guesses, attributing consumption to
+  single containers.  On OpenShift helping to decide "shift this
+  container to a different node which has solar generated power
+  right now".  Kepler also getting available as source for PCP.
 * link:https://github.com/influxdata/telegraf[Intel telegraf:]
   influxdb plugin, makes power stats available to influxdb and
   for example Grafana.
+
 
 
 === Hardware requirements
@@ -90,6 +101,12 @@ fan etc.  When the system runs on battery, we have the overall
 consumption from the metrics on the right, see the readings on the
 left, and then see how much all in all the other components 
 consume.
+
+=== Hardware requirements, new version
+
+.pmda-denki measure points2
+image:overview_krita.jpg[width=900]
+
 
 == Installation & Config
 As the first step, we will install PCP.  Package "pcp-zeroconf"
@@ -260,13 +277,45 @@ can also directly to visualizations.
 
 image:l480-gmeet-bo-bluetooth-then-chargingb.jpg[width=900]
 
+=== Most efficient system for my workload
+
+For a given workload, what's the most efficient system?  For example, the
+task of "unzipping data", which system is most efficient?  I compared these
+systems:
+
+* **Thinkpad L480:** x86_64, model released 2018, an 8th gen Intel
+  i5-8250U CPU (14nm), 4 cores without hyperthreading.
+  For this system, all three sources to measure power consumption are usable.
+* **Macbook Pro Asahi Fedora remix:** 10 core AppleSilicon M2 CPU (5nm),
+  aarch64. Model from 2023. Up to 10 threads can be run on separate cores.
+* **Steam Deck:** AMD CPU with 4 cores/8 threads (7nm), released 2022
+* **Raspberry Pi 4:** aarch64, a 4 core (16nm) system from 2019
+* **Star 64:** RISC-V board with 4 cores, introduced 2023
+* **Sun Ultra5:** sparc64, 1 core UltraSPARC IIi (270Mhz, 0.35 μm (350nm)),
+    released 1998, running Linu^WNetBSD
+
+The results:
+
+image:gnuplot_3_1_consumption_per_job.png[width=900]
+
+With logarithmic scale:
+
+image:gnuplot_3_1_consumption_per_job_log.png[width=900]
+
+Leaving out the older systems:
+
+image:chorn_power_efficiency_comparison_05.png[width=900]
+image:chorn_power_efficiency_comparison_06.png[width=900]
+image:chorn_power_efficiency_comparison_04.png[width=900]
+
+
 == Future
 
 Possible features
 
 * pcp-htop as of PCP 6.1 can report anything in top-style, so
   it can provide a nice overview of the top-power-consuming
-  provesses
+  processes
 * Right now, we have overall system consumption of up to
   3 sources.  Combined with how much load single processes
   are causing, one can create derived metrics so express
@@ -278,7 +327,6 @@ Possible features
   expressed in gramm-of-coal or liter-of-fuel.
 * Implementation of further sensors: counters from
   other architectures like ARM, NVidia etc.
-* Interface to read metrics from Kepler
 * Apple has apparently directly ~20 power sensors directly
   on the AppleSilicon hardware.  As of 2023-09-11, these
   are not available, but will probably in the near future
@@ -290,7 +338,6 @@ Possible features
   When running a workload on these, how much energy is the
   workload causing with and without the mitigation?  
   pmda-denki can help to measure that.
-* link:https://fluxcoil.net/wiki/software/performance_co-pilot/pmda-denki#further_implementations[more ideas]
 
 == Appendix
 === Implemented and potential future metric sources

@@ -444,6 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_history">1.1. History</a></li>
 <li><a href="#_related_software">1.2. Related software</a></li>
 <li><a href="#_hardware_requirements">1.3. Hardware requirements</a></li>
+<li><a href="#_hardware_requirements_new_version">1.4. Hardware requirements, new version</a></li>
 </ul>
 </li>
 <li><a href="#_installation_config">2. Installation &amp; Config</a></li>
@@ -454,6 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_where_is_software_burning_power">3.3. Where is software burning power?</a></li>
 <li><a href="#_i_need_notification_about_power_consumption_changes">3.4. I need notification about power consumption changes</a></li>
 <li><a href="#_visualization_of_uncharge">3.5. Visualization of (un)charge</a></li>
+<li><a href="#_most_efficient_system_for_my_workload">3.6. Most efficient system for my workload</a></li>
 </ul>
 </li>
 <li><a href="#_future">4. Future</a></li>
@@ -525,11 +527,25 @@ but not as accurate as what I ended up with.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://next.redhat.com/2023/08/22/introducing-kepler-efficient-power-monitoring-for-kubernetes/">Kepler:</a>
-power stats collection, having containers in mind and uses
-AI to understand how much is consumed by single containers/pods.
-Can shift workloads based on criteria ("this area has currently
-sun and solar energy, let&#8217;s move loads here")</p>
+<p>2007: <a href="https://en.wikipedia.org/wiki/PowerTOP">powertop</a>,
+default tool on x86 to see live power metrics, to optimize.
+No abstraction into library, no historical metrics.</p>
+</li>
+<li>
+<p>2021: <a href="https://github.com/performancecopilot/pcp/">pmda-denki</a>,
+PCP power consumption metrics.  Name appeared first at
+<a href="https://pcp.io/papers/lmsensors.20190308.pdf">pcp conf 2019</a>.
+Via PCP we get historical recording, live monitoring, warnings
+(PMIE), visualization via redis/Grafana, anomaly detection.  pmda-denki
+is now part of RHEL8 and 9.</p>
+</li>
+<li>
+<p>2022 (?): <a href="https://github.com/sustainable-computing-io/kepler">Kepler</a>,
+heavy duty, Red Hat/IBM seeded and sponsored.  Kepler is reading
+consumption metrics, taking guesses, attributing consumption to
+single containers.  On OpenShift helping to decide "shift this
+container to a different node which has solar generated power
+right now".  Kepler also getting available as source for PCP.</p>
 </li>
 <li>
 <p><a href="https://github.com/influxdata/telegraf">Intel telegraf:</a>
@@ -589,6 +605,13 @@ fan etc.  When the system runs on battery, we have the overall
 consumption from the metrics on the right, see the readings on the
 left, and then see how much all in all the other components
 consume.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hardware_requirements_new_version">1.4. Hardware requirements, new version</h3>
+<div class="paragraph">
+<div class="title">pmda-denki measure points2</div>
+<p><span class="image"><img src="images/overview_krita.jpg" alt="overview krita" width="900"></span></p>
 </div>
 </div>
 </div>
@@ -824,6 +847,60 @@ can also directly to visualizations.</p>
 <p><span class="image"><img src="images/l480-gmeet-bo-bluetooth-then-chargingb.jpg" alt="l480 gmeet bo bluetooth then chargingb" width="900"></span></p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_most_efficient_system_for_my_workload">3.6. Most efficient system for my workload</h3>
+<div class="paragraph">
+<p>For a given workload, what&#8217;s the most efficient system?  For example, the
+task of "unzipping data", which system is most efficient?  I compared these
+systems:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Thinkpad L480:</strong> x86_64, model released 2018, an 8th gen Intel
+i5-8250U CPU (14nm), 4 cores without hyperthreading.
+For this system, all three sources to measure power consumption are usable.</p>
+</li>
+<li>
+<p><strong>Macbook Pro Asahi Fedora remix:</strong> 10 core AppleSilicon M2 CPU (5nm),
+aarch64. Model from 2023. Up to 10 threads can be run on separate cores.</p>
+</li>
+<li>
+<p><strong>Steam Deck:</strong> AMD CPU with 4 cores/8 threads (7nm), released 2022</p>
+</li>
+<li>
+<p><strong>Raspberry Pi 4:</strong> aarch64, a 4 core (16nm) system from 2019</p>
+</li>
+<li>
+<p><strong>Star 64:</strong> RISC-V board with 4 cores, introduced 2023</p>
+</li>
+<li>
+<p><strong>Sun Ultra5:</strong> sparc64, 1 core UltraSPARC IIi (270Mhz, 0.35 μm (350nm)),
+released 1998, running Linu^WNetBSD</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The results:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/gnuplot_3_1_consumption_per_job.png" alt="gnuplot 3 1 consumption per job" width="900"></span></p>
+</div>
+<div class="paragraph">
+<p>With logarithmic scale:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/gnuplot_3_1_consumption_per_job_log.png" alt="gnuplot 3 1 consumption per job log" width="900"></span></p>
+</div>
+<div class="paragraph">
+<p>Leaving out the older systems:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/chorn_power_efficiency_comparison_05.png" alt="chorn power efficiency comparison 05" width="900"></span>
+<span class="image"><img src="images/chorn_power_efficiency_comparison_06.png" alt="chorn power efficiency comparison 06" width="900"></span>
+<span class="image"><img src="images/chorn_power_efficiency_comparison_04.png" alt="chorn power efficiency comparison 04" width="900"></span></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -837,7 +914,7 @@ can also directly to visualizations.</p>
 <li>
 <p>pcp-htop as of PCP 6.1 can report anything in top-style, so
 it can provide a nice overview of the top-power-consuming
-provesses</p>
+processes</p>
 </li>
 <li>
 <p>Right now, we have overall system consumption of up to
@@ -857,9 +934,6 @@ expressed in gramm-of-coal or liter-of-fuel.</p>
 other architectures like ARM, NVidia etc.</p>
 </li>
 <li>
-<p>Interface to read metrics from Kepler</p>
-</li>
-<li>
 <p>Apple has apparently directly ~20 power sensors directly
 on the AppleSilicon hardware.  As of 2023-09-11, these
 are not available, but will probably in the near future
@@ -873,9 +947,6 @@ Downfall get fixed in the Linux kernel and microcode.
 When running a workload on these, how much energy is the
 workload causing with and without the mitigation?
 pmda-denki can help to measure that.</p>
-</li>
-<li>
-<p><a href="https://fluxcoil.net/wiki/software/performance_co-pilot/pmda-denki#further_implementations">more ideas</a></p>
 </li>
 </ul>
 </div>
@@ -984,7 +1055,7 @@ for time X, i.e. 15min" is supported.  Alternatively,
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-22 17:58:04 +0900
+Last updated 2024-09-20 16:44:36 +0900
 </div>
 </div>
 </body>
