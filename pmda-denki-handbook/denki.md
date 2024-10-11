@@ -343,8 +343,9 @@ Possible features
 === Implemented and potential future metric sources
 
 ==== Power Delivery Unit (PDU) or smart plug based
-  * Billerica COLO Devices, via 
-    link:https://opendev.org/openstack/sushy[link]
+  * Billerica COLO Smart PDU devices (i.e. pro3x pdu) support
+    redfish, reading metrics is for example implemented via
+    link:https://opendev.org/openstack/sushy[Sushy, a Python libary]
   * HPE ilo: implemented via
     link:https://github.com/HewlettPackard/python-ilorest-library[python-ilorest-library]
   * Tasmota firmware smart plug, also in this area
