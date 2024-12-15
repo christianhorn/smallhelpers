@@ -7,6 +7,8 @@ import cpmapi as c_api
 import time
 import re
 
+# Christian Horn <chorn@fluxcoil.net>
+# GPLv2
 # TODO: fetch consumption metric as float
 #	   if looking at gauge metric like battery-power-now, we only
 #		   consider the last value right now.
