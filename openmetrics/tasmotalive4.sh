@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IP="192.168.0.3"
+IP="192.168.5.18"
 
 # exit if unreachable
 if `ping -W 1 $IP -c1 >/dev/null`; then

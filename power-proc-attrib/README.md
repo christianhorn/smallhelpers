@@ -112,3 +112,6 @@ grafana visualization.
   by the script though.
 * lookup specifics of proc.psinfo.utime source, consider to add
   kernel land load
+* With Grafana visualization: even when processes are killed, they stay
+  in the Grafana graph as line.  Restarting pmlogger to start a new
+  archive fixes this.. but is no proper solution.
