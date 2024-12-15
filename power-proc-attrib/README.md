@@ -37,7 +37,8 @@ For example on Fedora41:
 #  metrics, https://github.com/performancecopilot/pcp/pull/2106
 
 # Setup pcp with pmlogger and pmdas, i.e. in execute
-dnf -y install pcp-zeroconf pcp-pmda-denki pcp-pmda-openmetrics
+dnf -y install pcp-zeroconf pcp-pmda-denki pcp-pmda-openmetrics \
+  python3-pcp perl-PCP-PMDA pcp-devel pcp-libs-devel
 cd /usr/libexec/pcp/pmdas/denki && ./Install
 cd /usr/libexec/pcp/pmdas/openmetrics && ./Install
 
