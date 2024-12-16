@@ -16,7 +16,7 @@ import re
 #	   we do not catch shortlived processes, living between start/end
 #	   lookup specifics of proc.psinfo.utime source
 
-measuretime = 60
+measuretime = 10
 
 procdict = {}
 procdictold = {}
@@ -76,16 +76,26 @@ while True:
 	procdict = {}
 	fetchall()
 
-	# How many userland shares were worked in the timespan?
+	# Create a summary for each process name, i.e. count up
+	# multiple firefox threads
+	procshortdict = {}
 	userlandsum = 0
 	newprocs = 0
-	for key in procdict.keys():
-		if procdict[key] != 0:
-			if key in procdictold:
-				if procdict[key] != procdictold[key]:
-					userlandsum += procdict[key] - procdictold[key]
+	for process in procdict.keys():
+		if procdict[process] != 0:
+			if process in procdictold:
+				if procdict[process] != procdictold[process]:
+					procshort = re.sub('/.*/','',process)
+					procshort = re.sub('^.* ','',procshort)
+					procshort = re.sub('^./','',procshort)
+					if procshort in procshortdict:
+						procshortdict[procshort] += procdict[process] - procdictold[process]
+					else:
+						procshortdict[procshort] = procdict[process] - procdictold[process]
+					userlandsum += procdict[process] - procdictold[process]
 			else:
 				newprocs += 1
+
 	print("The processes consumed this many userland shares:",userlandsum)
 	print("New processes which appeared:",newprocs)
 	
@@ -96,20 +106,6 @@ while True:
 	print("System consumption, calculated based on power_now::",
 		"{:2.2f}".format(consumptionpowernow),"W")
 	
-	# Create a summary for each process name, i.e. count up
-	# multiple firefox threads
-	procshortdict = {}
-	for process in procdict.keys():
-		if procdict[process] != 0 and process in procdictold:
-			if procdict[process] != procdictold[process]:
-				procshort = re.sub('/.*/','',process)
-				procshort = re.sub('^.* ','',procshort)
-				procshort = re.sub('^./','',procshort)
-				if procshort in procshortdict:
-					procshortdict[procshort] += procdict[process] - procdictold[process]
-				else:
-					procshortdict[procshort] = procdict[process] - procdictold[process]
-
 	# So, how many percent of the overall shares had each process?
 	procpercent = {}
 	procconsumedbat = {}
