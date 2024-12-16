@@ -52,13 +52,7 @@ def fetchall():
 			c_api.PM_TYPE_U32)
 		cnt += 1
 		if atom.ul != 0:
-			procshort = re.sub('/.*/','',process)
-			procshort = re.sub('^.* ','',procshort)
-			procshort = re.sub('^./','',procshort)
-			if procshort in procdict:
-				procdict[procshort] += atom.ul
-			else:
-				procdict[procshort] = atom.ul
+			procdict[process] = atom.ul
 
 	# Fetch denki.bat.power_now -i 0
 	denkipmids = ctx.pmLookupName('denki.bat.power_now')
@@ -102,17 +96,28 @@ while True:
 	print("System consumption, calculated based on power_now::",
 		"{:2.2f}".format(consumptionpowernow),"W")
 	
+	# Create a summary for each process name, i.e. count up
+	# multiple firefox threads
+	procshortdict = {}
+	for process in procdict.keys():
+		if procdict[process] != 0 and process in procdictold:
+			if procdict[process] != procdictold[process]:
+				procshort = re.sub('/.*/','',process)
+				procshort = re.sub('^.* ','',procshort)
+				procshort = re.sub('^./','',procshort)
+				if procshort in procshortdict:
+					procshortdict[procshort] += procdict[process] - procdictold[process]
+				else:
+					procshortdict[procshort] = procdict[process] - procdictold[process]
+
 	# So, how many percent of the overall shares had each process?
 	procpercent = {}
 	procconsumedbat = {}
 	procconsumedmsr = {}
-	for key in procdict.keys():
-		if procdict[key] != 0:
-			if key in procdictold:
-				if procdict[key] != procdictold[key]:
-					procpercent[key] = int(100*(procdict[key] - procdictold[key])/userlandsum)
-					procconsumedbat[key] = int(100*(procdict[key] - procdictold[key])/userlandsum) * consumptionpowernow / 100
-					procconsumedmsr[key] = int(100*(procdict[key] - procdictold[key])/userlandsum) * consumptionmsr / 100
+	for key in procshortdict.keys():
+		procpercent[key] = int( 100 * procshortdict[key] / userlandsum)
+		procconsumedbat[key] = procpercent[key] * consumptionpowernow / 100
+		procconsumedmsr[key] = procpercent[key] * consumptionmsr / 100
 	
 	sorted_items = sorted(procpercent.items(), key=lambda kv: (kv[1], kv[1]))
 	
