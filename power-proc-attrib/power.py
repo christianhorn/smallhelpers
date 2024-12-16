@@ -9,6 +9,7 @@ import re
 
 # Christian Horn <chorn@fluxcoil.net>
 # GPLv2
+#
 # TODO: fetch consumption metric as float
 #	   if looking at gauge metric like battery-power-now, we only
 #		   consider the last value right now.
@@ -26,7 +27,6 @@ def fetchall():
 	global denkivar
 	global consumptionpowernow
 
-	print("debug0")
 	# Setup context, initiate fetching
 	ctx = pmapi.pmContext()
 	pmids = ctx.pmLookupName('proc.psinfo.utime')
@@ -43,7 +43,6 @@ def fetchall():
 		c_api.PM_TYPE_U32)
 	denkivar = atom.ul
 
-	print("debug0.5")
 	# Take snapshot of the userland-counters of all processes
 	cnt = 0
 	# procdict = {}
@@ -61,7 +60,6 @@ def fetchall():
 			else:
 				procdict[procshort] = atom.ul
 
-	print("debug0.7")
 	# Fetch denki.bat.power_now -i 0
 	denkipmids = ctx.pmLookupName('denki.bat.power_now')
 	denkidescs = ctx.pmLookupDescs(denkipmids)
@@ -70,7 +68,6 @@ def fetchall():
 		denkiresults.contents.get_vlist(0, 0), denkidescs[0].contents.type,
 		c_api.PM_TYPE_U32)
 	consumptionpowernow = atom.ul
-	print("debug1")
 
 fetchall()
 
@@ -82,6 +79,7 @@ while True:
 	procdictold = procdict.copy()
 	denkivarold = denkivar
 
+	procdict = {}
 	fetchall()
 
 	# How many userland shares were worked in the timespan?
