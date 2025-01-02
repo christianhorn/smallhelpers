@@ -95,3 +95,17 @@ I use this right now:
 Then have sway reread the changed config in pushing ctrl+superkey+c .
 To debug, execute '/opt/bumblebee-status/bumblebee-status -m msrpower'
 on the command line.
+
+## Bugs
+
+* This code might also fit as extension of the existing 'battery' module, 
+  but as PCP is required here for actually reading the metric, I feel like
+  that's to specific to be added to 'battery'.
+* We can not just read the value from pmcd (i.e. with 'pminfo -f'), but we
+  are looking here at a counter at 2 points in time, and are interested in
+  the change.  Right now, we just execute 'pmrep' to read 2 samples of the
+  metric, but that's just giving us an idea of the consumption in these
+  3 seconds.  If status bar updates this all 60seconds, then we are
+  57sec blind regarding consumption.  We could also read the values directly
+  in the module - would get much smaller blind-window then, but we would
+  then need the user to access the MSR registers directly.
