@@ -31,6 +31,7 @@ or RHEL:
 dnf install pcp pmda-denki
 cd /var/lib/pcp/pmdas/denki
 ./Install
+systemctl enable --now pmcd
 ```
 
 As user now verify that pmda-denki is offering the metric:
