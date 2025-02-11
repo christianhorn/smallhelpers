@@ -1,26 +1,21 @@
 ---
-- name: playbook to ensure pmlogger is archiving tasmota metrics
+- name: playbook to ensure pmlogger is archiving lmsensors metrics
   hosts: all
   gather_facts: yes
   become: true
   remote_user: chris
 
   tasks:
-    - name: Ensure pmrep file is in place
-      copy:
-        src: files/tasmota.conf
-        dest: /etc/pcp/pmrep/tasmota.conf
-
     - name: Ensure controlfile is in place
       copy:
-        src: files/tasmota
-        dest: /etc/pcp/pmlogger/control.d/tasmota
+        src: files/lmsensors
+        dest: /etc/pcp/pmlogger/control.d/lmsensors
       notify: pmlogger restart
 
     - name: Ensure pmlogger conffile is in place
       copy:
-        src: files/config.tasmota
-        dest: /var/lib/pcp/config/pmlogger/config.tasmota
+        src: files/config.lmsensors
+        dest: /var/lib/pcp/config/pmlogger/config.lmsensors
       notify: pmlogger restart
 
   handlers:

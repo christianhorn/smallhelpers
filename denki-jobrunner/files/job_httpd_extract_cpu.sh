@@ -20,6 +20,7 @@ extract () {
                 MYWORKDIR="httpd-work-${THREAD}"
 
 		bzcat httpd-2.4.57.tar.bz2 >/dev/null
+		# /mnt/store/deploy3/images/tmp2/usr/bin/bzcat httpd-2.4.57.tar.bz2 >/dev/null
 
                 RUNS=$(( $RUNS + 1 ))
                 echo "$RUNS" >/tmp/runcounter_${THREAD}

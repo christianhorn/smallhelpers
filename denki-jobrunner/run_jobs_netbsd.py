@@ -14,17 +14,17 @@ import re
 import sys
 import os.path
 
-sutname     = "amd10"      # The system under test
+sutname     = "amd64"      # The system under test
 hostrapl    = "kosmos"      # Which system will provide RAPL values?
 hostbat     = "asahi"       # Which system will provide battery values?
 hosttasmota = "kosmos"      # Which system will provide Tasmota values?
 hostlmsensors = "asahi"     # Which system will provide lmsensors values?
 
 UseRaplSysfs    = False      # Use RAPL filesystem metrics (x86 only)
-UseRaplMSR      = False      # Use RAPL MSR register metrics (x86 only, select Intel CPUs)
-UseBat          = True
+UseRaplMSR      = True      # Use RAPL MSR register metrics (x86 only, select Intel CPUs)
+UseBat          = False
 UseTasmota      = False
-UseAsahiPower   = True     # Use MAC/Asahi power metric, available also when plugged in
+UseAsahiPower   = False     # Use MAC/Asahi power metric, available also when plugged in
 
 oneline     = True          # Output machine readable one-line-results?
 
@@ -64,7 +64,7 @@ def ansilmsensorsprep():
 
 def powerraplsysfs():
     ''' Read counter: What's the raw value for the rapl sysfs counter? '''
-    command = "pminfo -h " + hostrapl + " -f denki.raplsysfs | grep package-0"
+    command = "pminfo -h " + hostrapl + " -f denki.rapl.sysfs | grep package-0"
     out = subprocess.check_output(command, shell=True)
     out2 = out.strip()
     out3 = re.sub('.* ', '', out2.decode('UTF-8'))
@@ -72,7 +72,8 @@ def powerraplsysfs():
 
 def powerraplmsr():
     ''' Read counter: What's the raw value for the rapl MSR counter? '''
-    command = "pminfo -h " + hostrapl + " -f denki.raplmsr | grep psys_energy"
+    # command = "pminfo -h " + hostrapl + " -f denki.rapl.msr | grep psys_energy"
+    command = "pminfo -h " + hostrapl + " -f denki.rapl.msr | grep package_energy"
     out = subprocess.check_output(command, shell=True)
     out2 = out.strip()
     out3 = re.sub('.* ', '', out2.decode('UTF-8'))
@@ -112,8 +113,6 @@ def calculateAsahiPower():
             out = i.decode('UTF-8')
             counter += float(out)
             validlines += 1
-    if validlines == 0:
-        validlines = 1
     AsahiConsumedP = counter / validlines
     AsahiWattHourperrunP = AsahiConsumedP / ( 3600 * int(runs) / runtime )
     print("        AsahiConsumedP: own calculated power consumption in average:         %.2f" % AsahiConsumedP,"W")
@@ -345,6 +344,9 @@ def runjobthreaded():
     else:
         timeperjob = 0
 
+    if runtime == 0.0:
+        runtime = 0.1
+
     print("    Workload did run",runs,"times, with ",threads," threads.")
     print("    Single jobs did run in average %.1f" % timeperjob,"sec.")
 
@@ -400,6 +402,7 @@ def runjobthreaded():
 # fetch httpd:
 # wget -O httpd-2.4.57.tar.bz2 http://archive.apache.org/dist/httpd/httpd-2.4.57.tar.bz2
 
+print("CUSTOM: reports package consumption instead of phys.")
 # Do we need to fetch httpd?
 httpdfile = Path('./files/httpd-2.4.57.tar.bz2')
 if not httpdfile.is_file():
@@ -423,6 +426,8 @@ runjobthreaded()
 looptime = 300
 
 job = "job_justload_full.sh"
+# runjobthreaded()
+
 
 job = "job_io_read.sh"
 runjobplain()
@@ -433,9 +438,9 @@ runjobplain()
 
 
 job = "job_memwrite-128m-nosync.sh"
-# runjobplain()
+#runjobplain()
 job = "job_memwrite-128m-sync.sh"
-# runjobplain()
+#runjobplain()
 job = "job_memwrite-1024m-nosync.sh"
 runjobplain()
 job = "job_memwrite-1024m-sync.sh"
@@ -444,7 +449,7 @@ runjobplain()
 
 job = "job_iperf3_4.1.sh"
 # job = "job_iperf_4.1.sh"
-runjobplain()
+#runjobplain()
 
 
 job = "job_httpd_extract_cpu.sh 1"
@@ -463,6 +468,5 @@ job = "job_httpd_extract_cpu.sh 10"
 job = "job_httpd_extract_cpu.sh 14"
 job = "job_httpd_extract_cpu.sh 12"
 job = "job_httpd_extract_cpu.sh 13"
-# runjobthreaded()
 #for i in range(20):
 #    runjob()

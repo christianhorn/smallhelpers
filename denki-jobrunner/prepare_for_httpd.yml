@@ -18,23 +18,24 @@
     - name: Ensure packages on RHEL
       yum:
         name: 
-          - gcc
-          - bison
+          #- gcc
+          #- bison
           - bzip2
-          - flex
-          - apr-devel
-          - apr-util
-          - apr-util-devel
-          - apr-util-ldap
-          - apr-util-mysql
-          - apr-util-odbc
-          - apr-util-pgsql
-          - apr-util-sqlite
-          - pcre-devel
-          - openssl-libs
-          - libcurl-devel
+          - iperf3
+          #- flex
+          #- apr-devel
+          #- apr-util
+          #- apr-util-devel
+          #- apr-util-ldap
+          #- apr-util-mysql
+          #- apr-util-odbc
+          #- apr-util-pgsql
+          #- apr-util-sqlite
+          #- pcre-devel
+          #- openssl-libs
+          #- libcurl-devel
           # rhel9 amd64 needs this for compiling
-          - redhat-rpm-config
+          #- redhat-rpm-config
         state: present
       when: (ansible_facts.os_family == 'RedHat') or
             (ansible_facts.os_family == 'Fedora')
@@ -47,8 +48,17 @@
         - httpd-2.4.57.tar.bz2
         - job_sleep.sh
         - job_justload_full.sh
+        - job_iperf_4.1.sh
+        - job_iperf3_4.1.sh
         - job_httpd_extract_cpu.sh
         - job_httpd_compile_cpu.sh
+        - job_memwrite-128m-nosync.sh
+        - job_memwrite-128m-sync.sh
+        - job_memwrite-1024m-nosync.sh
+        - job_memwrite-1024m-sync.sh
+        - job_io_read.sh
+        - job_io_write_nosync.sh
+        - job_io_write_sync.sh
 
     - name: Ensure job_* is executable
       shell:
