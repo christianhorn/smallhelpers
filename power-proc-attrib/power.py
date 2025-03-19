@@ -35,7 +35,7 @@ def fetchall():
 	allpids = ctx.pmGetInDom(descs[0])[1]
 
 	# Fetch energy-value for rapl-msr-psys_energy
-	denkipmids = ctx.pmLookupName('denki.raplmsr')
+	denkipmids = ctx.pmLookupName('denki.rapl.msr')
 	denkidescs = ctx.pmLookupDescs(denkipmids)
 	denkiresults = ctx.pmFetch(denkipmids)
 	atom = ctx.pmExtractValue(denkiresults.contents.get_valfmt(0),
