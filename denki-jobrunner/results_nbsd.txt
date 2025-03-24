@@ -1,0 +1,147 @@
+## 4cpu nbsd aarch64 KVM guest, emulated, cortex-a53, 8GB RAM
+    oneline aarch64 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-10.0 RaplMSR-9.40-0.02611
+    oneline aarch64 job_io_read.sh looptime-300 results-99MB/sec RaplMSR-12.48
+    oneline aarch64 job_io_write_nosync.sh looptime-300 results-61MB/sec RaplMSR-11.72
+    oneline aarch64 job_io_write_sync.sh looptime-300 results-26MB/sec RaplMSR-12.00
+    oneline aarch64 job_memwrite-128m-nosync.sh looptime-300 results-67 RaplMSR-11.94
+    oneline aarch64 job_memwrite-128m-sync.sh looptime-300 results-66 RaplMSR-11.98
+    oneline aarch64 job_memwrite-1024m-nosync.sh looptime-300 results-8 RaplMSR-11.96
+    oneline aarch64 job_memwrite-1024m-sync.sh looptime-300 results-8 RaplMSR-11.96
+    oneline aarch64 job_iperf3_4.1.sh looptime-300 results-61.8Mbits/sec-61.8Mbits/sec RaplMSR-11.93
+    oneline aarch64 job_httpd_extract_cpu.sh 1 looptime-300 runs-48 threads-1 timeperjob-6.3 RaplMSR-11.94-0.02093
+    oneline aarch64 job_httpd_extract_cpu.sh 2 looptime-300 runs-96 threads-2 timeperjob-6.3 RaplMSR-11.96-0.01052
+    oneline aarch64 job_httpd_extract_cpu.sh 4 looptime-300 runs-144 threads-4 timeperjob-8.5 RaplMSR-11.92-0.00706
+    oneline aarch64 job_httpd_extract_cpu.sh 8 looptime-300 runs-140 threads-8 timeperjob-17.7 RaplMSR-11.97-0.00736
+
+## 4 cpu nbsd riscv guest, emulated, 8GB RAM
+    oneline riscv job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-11.0 RaplMSR-6.82-0.02083
+    oneline riscv job_io_read.sh looptime-300 results-13MB/sec RaplMSR-12.61
+    oneline riscv job_io_write_nosync.sh looptime-300 results-14MB/sec RaplMSR-11.93
+    oneline riscv job_io_write_sync.sh looptime-300 results-12MB/sec RaplMSR-11.89
+    oneline riscv job_memwrite-128m-nosync.sh looptime-300 results-22 RaplMSR-11.94
+    oneline riscv job_memwrite-128m-sync.sh looptime-300 results-22 RaplMSR-11.95
+    oneline riscv job_memwrite-1024m-nosync.sh looptime-300 results-2 RaplMSR-11.93
+    oneline riscv job_memwrite-1024m-sync.sh looptime-300 results-2 RaplMSR-11.95
+    oneline riscv job_iperf3_4.1.sh looptime-300 results-50.1Mbits/sec-50.1Mbits/sec RaplMSR-11.96
+    oneline riscv job_httpd_extract_cpu.sh 1 looptime-300 runs-52 threads-1 timeperjob-5.9 RaplMSR-11.93-0.01951
+    oneline riscv job_httpd_extract_cpu.sh 2 looptime-300 runs-84 threads-2 timeperjob-7.2 RaplMSR-11.94-0.01196
+    oneline riscv job_httpd_extract_cpu.sh 4 looptime-300 runs-123 threads-4 timeperjob-10.0 RaplMSR-11.94-0.00833
+    oneline riscv job_httpd_extract_cpu.sh 8 looptime-300 runs-122 threads-8 timeperjob-20.6 RaplMSR-11.98-0.00857
+
+## 4cpu nbsd amd64 KVM guest
+    oneline amd64-virt-kvm job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-10.0 RaplMSR-2.60-0.00722
+    oneline amd64-virt-kvm job_io_read.sh looptime-300 results-4100MB/sec RaplMSR-17.89
+    oneline amd64-virt-kvm job_io_write_nosync.sh looptime-300 results-1100MB/sec RaplMSR-28.00
+    oneline amd64-virt-kvm job_io_write_sync.sh looptime-300 results-198MB/sec RaplMSR-22.60
+    oneline amd64-virt-kvm job_memwrite-128m-nosync.sh looptime-300 results-582 RaplMSR-11.92
+    oneline amd64-virt-kvm job_memwrite-128m-sync.sh looptime-300 results-566 RaplMSR-11.97
+    oneline amd64-virt-kvm job_memwrite-1024m-nosync.sh looptime-300 results-73 RaplMSR-11.96
+    oneline amd64-virt-kvm job_memwrite-1024m-sync.sh looptime-300 results-63 RaplMSR-11.96
+    oneline amd64-virt-kvm job_iperf3_4.1.sh looptime-300 results-1030Mbits/sec-1030Mbits/sec RaplMSR-11.96
+    oneline amd64-virt-kvm job_httpd_extract_cpu.sh 1 looptime-300 runs-260 threads-1 timeperjob-1.2 RaplMSR-11.92-0.00383
+    oneline amd64-virt-kvm job_httpd_extract_cpu.sh 2 looptime-300 runs-416 threads-2 timeperjob-1.4 RaplMSR-11.98-0.00241
+    oneline amd64-virt-kvm job_httpd_extract_cpu.sh 4 looptime-300 runs-597 threads-4 timeperjob-2.0 RaplMSR-11.96-0.00168
+    oneline amd64-virt-kvm job_httpd_extract_cpu.sh 8 looptime-300 runs-587 threads-8 timeperjob-4.1 RaplMSR-11.95-0.00171
+
+## 1 cpu nbsd sparc64 guest, emulated, 2GB RAM
+    oneline sparc64 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-10.0 RaplMSR-12.60-0.03500
+    oneline sparc64 job_io_read.sh looptime-300 results-139MB/sec RaplMSR-12.05
+    oneline sparc64 job_io_write_nosync.sh looptime-300 results-46MB/sec RaplMSR-11.96
+    oneline sparc64 job_io_write_sync.sh looptime-300 results-22MB/sec RaplMSR-11.96
+    oneline sparc64 job_memwrite-128m-nosync.sh looptime-300 results-92 RaplMSR-11.98
+    oneline sparc64 job_memwrite-128m-sync.sh looptime-300 results-93 RaplMSR-11.91
+    oneline sparc64 job_memwrite-1024m-nosync.sh looptime-300 results-4 RaplMSR-11.95
+    oneline sparc64 job_memwrite-1024m-sync.sh looptime-300 results-3 RaplMSR-11.96
+    oneline sparc64 job_iperf3_4.1.sh looptime-300 results-34.2Mbits/sec-34.2Mbits/sec RaplMSR-11.95
+    oneline sparc64 job_httpd_extract_cpu.sh 1 looptime-300 runs-7 threads-1 timeperjob-44.4 RaplMSR-11.94-0.14738
+    oneline sparc64 job_httpd_extract_cpu.sh 2 looptime-300 runs-6 threads-2 timeperjob-105.7 RaplMSR-11.93-0.17509
+    oneline sparc64 job_httpd_extract_cpu.sh 4 looptime-300 runs-4 threads-4 timeperjob-313.0 RaplMSR-11.97-0.26014
+    oneline sparc64 job_httpd_extract_cpu.sh 8 looptime-300 runs-0 threads-8 timeperjob-0.0 RaplMSR-11.97-0.0000
+
+## 4cpu nbsd amd64 guest, emulated Icelake-server-noTSX
+    oneline amd64-emulated job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-10.0 RaplMSR-3.40-0.00944
+    oneline amd64-emulated job_io_read.sh looptime-300 results-343MB/sec RaplMSR-16.69
+    oneline amd64-emulated job_io_write_nosync.sh looptime-300 results-79MB/sec RaplMSR-11.79
+    oneline amd64-emulated job_io_write_sync.sh looptime-300 results-45MB/sec RaplMSR-12.26
+    oneline amd64-emulated job_memwrite-128m-nosync.sh looptime-300 results-180 RaplMSR-11.96
+    oneline amd64-emulated job_memwrite-128m-sync.sh looptime-300 results-90 RaplMSR-11.95
+    oneline amd64-emulated job_memwrite-1024m-nosync.sh looptime-300 results-21 RaplMSR-11.95
+    oneline amd64-emulated job_memwrite-1024m-sync.sh looptime-300 results-11 RaplMSR-11.96
+    oneline amd64-emulated job_iperf3_4.1.sh looptime-300 results-98.1Mbits/sec-98.1Mbits/sec RaplMSR-12.07
+    oneline amd64-emulated job_httpd_extract_cpu.sh 1 looptime-300 runs-38 threads-1 timeperjob-7.9 RaplMSR-11.94-0.02628
+    oneline amd64-emulated job_httpd_extract_cpu.sh 2 looptime-300 runs-72 threads-2 timeperjob-8.5 RaplMSR-11.95-0.01407
+    oneline amd64-emulated job_httpd_extract_cpu.sh 4 looptime-300 runs-109 threads-4 timeperjob-11.4 RaplMSR-11.93-0.00943
+    oneline amd64-emulated job_httpd_extract_cpu.sh 8 looptime-300 runs-109 threads-8 timeperjob-22.7 RaplMSR-11.94-0.00940
+
+## 4 cpu nbsd i386 guest, -cpu qemu32-v1, just 200mb ramdisk
+    oneline i386-qemu32-v1 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-10.0 RaplMSR-3.00-0.00833
+    oneline i386-qemu32-v1 job_io_read.sh looptime-300 results-125MB/sec RaplMSR-16.90
+    oneline i386-qemu32-v1 job_io_write_nosync.sh looptime-300 results-76MB/sec RaplMSR-11.27
+    oneline i386-qemu32-v1 job_io_write_sync.sh looptime-300 results-43MB/sec RaplMSR-12.29
+    oneline i386-qemu32-v1 job_memwrite-128m-nosync.sh looptime-300 results-78 RaplMSR-11.94
+    oneline i386-qemu32-v1 job_memwrite-128m-sync.sh looptime-300 results-80 RaplMSR-11.97
+    oneline i386-qemu32-v1 job_memwrite-1024m-nosync.sh looptime-300 results-14 RaplMSR-11.94
+    oneline i386-qemu32-v1 job_memwrite-1024m-sync.sh looptime-300 results-14 RaplMSR-11.95
+    oneline i386-qemu32-v1 job_iperf3_4.1.sh looptime-300 results-92.8Mbits/sec-92.8Mbits/sec RaplMSR-11.96
+    oneline i386-qemu32-v1 job_httpd_extract_cpu.sh 1 looptime-300 runs-33 threads-1 timeperjob-9.2 RaplMSR-11.96-0.03051
+    oneline i386-qemu32-v1 job_httpd_extract_cpu.sh 2 looptime-300 runs-79 threads-2 timeperjob-7.7 RaplMSR-11.93-0.01275
+    oneline i386-qemu32-v1 job_httpd_extract_cpu.sh 4 looptime-300 runs-119 threads-4 timeperjob-10.3 RaplMSR-11.96-0.00857
+    oneline i386-qemu32-v1 job_httpd_extract_cpu.sh 8 looptime-300 runs-129 threads-8 timeperjob-19.4 RaplMSR-11.95-0.00806
+
+## 4 cpu nbsd i386 guest, -cpu pentium2, drama running
+    oneline i386-pentium2 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-10.0 RaplMSR-5.40-0.01500
+    oneline i386-pentium2 job_io_read.sh looptime-300 results-105MB/sec RaplMSR-13.45
+    oneline i386-pentium2 job_io_write_nosync.sh looptime-300 results-65MB/sec RaplMSR-11.65
+    oneline i386-pentium2 job_io_write_sync.sh looptime-300 results-38MB/sec RaplMSR-12.00
+    oneline i386-pentium2 job_memwrite-128m-nosync.sh looptime-300 results-82 RaplMSR-11.96
+    oneline i386-pentium2 job_memwrite-128m-sync.sh looptime-300 results-80 RaplMSR-11.96
+    oneline i386-pentium2 job_memwrite-1024m-nosync.sh looptime-300 results-11 RaplMSR-11.97
+    oneline i386-pentium2 job_memwrite-1024m-sync.sh looptime-300 results-10 RaplMSR-11.93
+    oneline i386-pentium2 job_iperf3_4.1.sh looptime-300 results-76.5Mbits/sec-76.5Mbits/sec RaplMSR-12.15
+    oneline i386-pentium2 job_httpd_extract_cpu.sh 1 looptime-300 runs-44 threads-1 timeperjob-6.9 RaplMSR-11.94-0.02292
+    oneline i386-pentium2 job_httpd_extract_cpu.sh 2 looptime-300 runs-77 threads-2 timeperjob-7.9 RaplMSR-11.95-0.01319
+    oneline i386-pentium2 job_httpd_extract_cpu.sh 4 looptime-300 runs-107 threads-4 timeperjob-11.5 RaplMSR-11.96-0.00956
+    oneline i386-pentium2 job_httpd_extract_cpu.sh 8 looptime-300 runs-104 threads-8 timeperjob-23.8 RaplMSR-11.95-0.00990
+
+## 4 cpu nbsd sparc guest, emulated, nbsd uses just 1 cpu
+    oneline sparc job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-10.0 RaplMSR-12.00-0.03333
+    oneline sparc job_io_read.sh looptime-300 results-97MB/sec RaplMSR-11.87
+    oneline sparc job_io_write_nosync.sh looptime-300 results-40MB/sec RaplMSR-11.93
+    oneline sparc job_io_write_sync.sh looptime-300 results-17MB/sec RaplMSR-12.02
+    oneline sparc job_memwrite-128m-nosync.sh looptime-300 results-65 RaplMSR-11.97
+    oneline sparc job_memwrite-128m-sync.sh looptime-300 results-64 RaplMSR-11.98
+    oneline sparc job_httpd_extract_cpu.sh 1 looptime-300 runs-53 threads-1 timeperjob-5.7 RaplMSR-11.94-0.01902
+    oneline sparc job_httpd_extract_cpu.sh 2 looptime-300 runs-50 threads-2 timeperjob-12.1 RaplMSR-11.93-0.02009
+    oneline sparc job_httpd_extract_cpu.sh 4 looptime-300 runs-48 threads-4 timeperjob-25.7 RaplMSR-11.96-0.02132
+    oneline sparc job_httpd_extract_cpu.sh 8 looptime-300 runs-41 threads-8 timeperjob-61.1 RaplMSR-11.95-0.02534
+
+## 4 cpu Linux amd64 kvm guest
+    oneline amdf41 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-10.0 RaplMSR-2.50-0.00694
+    oneline amdf41 job_io_read.sh looptime-300 results-10000MB/s RaplMSR-14.50
+    oneline amdf41 job_io_write_nosync.sh looptime-300 results-1900MB/s RaplMSR-18.00
+    oneline amdf41 job_io_write_sync.sh looptime-300 results-674MB/s RaplMSR-21.50
+    oneline amdf41 job_memwrite-128m-nosync.sh looptime-300 results-5635 RaplMSR-12.34
+    oneline amdf41 job_memwrite-128m-sync.sh looptime-300 results-5275 RaplMSR-12.01
+    oneline amdf41 job_memwrite-1024m-nosync.sh looptime-300 results-682 RaplMSR-12.12
+    oneline amdf41 job_memwrite-1024m-sync.sh looptime-300 results-709 RaplMSR-11.95
+    oneline amdf41 job_iperf3_4.1.sh looptime-300 results-27400Mbits/sec-27400Mbits/sec RaplMSR-11.93
+    oneline amdf41 job_httpd_extract_cpu.sh 1 looptime-300 runs-294 threads-1 timeperjob-1.0 RaplMSR-12.05-0.00344
+    oneline amdf41 job_httpd_extract_cpu.sh 2 looptime-300 runs-456 threads-2 timeperjob-1.3 RaplMSR-12.11-0.00222
+    oneline amdf41 job_httpd_extract_cpu.sh 4 looptime-300 runs-642 threads-4 timeperjob-1.9 RaplMSR-11.97-0.00156
+    oneline amdf41 job_httpd_extract_cpu.sh 8 looptime-300 runs-529 threads-8 timeperjob-4.6 RaplMSR-11.96-0.00190
+
+
+						runs			bw				I/O									consumption/op
+						-1	-2	-4	-8					read		w/nosync	w/sync
+amd64-virt-kvm-libvirt	294	456	642	478	27400Mbits/sec	10000MB/s	1900MB/s	674MB/s		0.00344	0.00222	0.00156
+amd64-virt-kvm			260	416	597	587	1030Mbits/sec	4100MB/sec	1100MB/sec	198MB/sec	0.00383	0.00241	0.00168
+aarch64					48	96	144	140	61.8Mbits/sec	99MB/sec	61MB/sec	26MB/sec	0.02093	0.01052	0.00706
+risc-v					52	84	123	122	50.1Mbits/sec	13MB/sec	14MB/sec	12MB/sec	0.01951	0.01196	0.00833
+amd64-emulated			38	72	109	109	98.1Mbits/sec	372MB/sec	79MB/sec	45MB/sec	0.02628	0.01407	0.00943
+i386-qemu32-v1			33	79	119	129	92.8Mbits/sec	72MB/sec	68MB/sec	39MB/sec	0.03051	0.01275	0.00857
+i386-pentium2			44	77	107	104	76.5Mbits/sec	105MB/sec	65MB/sec	38MB/sec	0.02292	0.01319	0.00956
+sparc					53	50	48	41					97MB/sec	40MB/sec	17MB/sec	0.01902	0.02009	0.02132
+sparc64					7	6	4	0	34.2Mbits/sec	139MB/sec	46MB/sec	22MB/sec	0.14738	0.17509	0.26014
+
+TODO:
+- put all qemu-commands into a text file and offer that

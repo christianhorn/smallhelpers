@@ -1,0 +1,167 @@
+## running jobs on asahi directly
+oneline asahi-hypervisor job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-12.0 Bat-0.00-0.00000 Asahi-5.79-0.01929
+oneline asahi-hypervisor job_io_read.sh looptime-300 results-19500MB/s Bat-0.00 Asahi-4.81
+oneline asahi-hypervisor job_io_write_nosync.sh looptime-300 results-5300MB/s Bat-36.00 Asahi-5.57
+oneline asahi-hypervisor job_io_write_sync.sh looptime-300 results-1600MB/s Bat-36.00 Asahi-5.54
+oneline asahi-hypervisor job_memwrite-128m-nosync.sh looptime-300 results-9473 Bat-7.99 Asahi-7.34
+oneline asahi-hypervisor job_memwrite-128m-sync.sh looptime-300 results-8979 Bat-6.10 Asahi-7.01
+oneline asahi-hypervisor job_memwrite-1024m-nosync.sh looptime-300 results-2108 Bat-12.44 Asahi-10.04
+oneline asahi-hypervisor job_memwrite-1024m-sync.sh looptime-300 results-2075 Bat-8.70 Asahi-10.20
+oneline asahi-hypervisor job_iperf3_4.1.sh looptime-300 results-75300Mbits/sec-75300Mbits/sec Bat-25.24 Asahi-16.68
+oneline asahi-hypervisor job_httpd_extract_cpu.sh 1 looptime-300 runs-495 threads-1 timeperjob-0.6 Bat-0.36-0.00006 Asahi-10.49-0.00177
+oneline asahi-hypervisor job_httpd_extract_cpu.sh 2 looptime-300 runs-989 threads-2 timeperjob-0.6 Bat-19.19-0.00163 Asahi-14.24-0.00121
+oneline asahi-hypervisor job_httpd_extract_cpu.sh 4 looptime-300 runs-1954 threads-4 timeperjob-0.6 Bat-24.20-0.00104 Asahi-21.39-0.00092
+oneline asahi-hypervisor job_httpd_extract_cpu.sh 8 looptime-300 runs-3518 threads-8 timeperjob-0.7 Bat-35.17-0.00084 Asahi-31.66-0.00075
+oneline asahi-hypervisor job_httpd_extract_cpu.sh 13 looptime-300 runs-3666 threads-13 timeperjob-1.1 Bat-29.44-0.00067 Asahi-33.05-0.00076
+
+## running jobs on RHEL ARM9.4, virtualized on Asahi
+oneline arm94-virt job_sleep.sh 				  looptime-10  runs-1    threads-1  timeperjob-12.0  Bat-0.00-0.00000   Asahi-7.82-0.02607
+oneline arm94-virt job_io_read.sh looptime-300 results-9000MB/s Bat-9.00 Asahi-4.90
+oneline arm94-virt job_io_write_nosync.sh looptime-300 results-2400MB/s Bat-18.00 Asahi-4.90
+oneline arm94-virt job_io_write_sync.sh looptime-300 results-853MB/s Bat-18.00 Asahi-6.00
+oneline arm94-virt job_iperf3_4.1.sh 			  looptime-300 results-70500Mbits/sec-70500Mbits/sec   Bat-48.64 		    Asahi-27.82
+oneline arm94-virt job_memwrite-1024m-nosync.sh 	  looptime-300 results-1373 					     Bat-48.64 		    Asahi-10.76
+oneline arm94-virt job_memwrite-1024m-sync.sh 		  looptime-300 results-1393 					     Bat-7.75 		    Asahi-10.72
+oneline arm94-virt job_httpd_extract_cpu.sh 1  looptime-300 runs-466  threads-1  timeperjob-0.6   Bat-5.96-0.00107   Asahi-9.95-0.00179
+oneline arm94-virt job_httpd_extract_cpu.sh 2  looptime-300 runs-958  threads-2  timeperjob-0.6   Bat-20.86-0.00183  Asahi-14.17-0.00124
+oneline arm94-virt job_httpd_extract_cpu.sh 4  looptime-300 runs-1909 threads-4  timeperjob-0.6   Bat-23.96-0.00105  Asahi-21.92-0.00096
+oneline arm94-virt job_httpd_extract_cpu.sh 8  looptime-300 runs-1868 threads-8  timeperjob-1.3   Bat-19.19-0.00086  Asahi-22.35-0.00100
+oneline arm94-virt job_httpd_extract_cpu.sh 13 looptime-300 runs-1769 threads-13 timeperjob-2.2   Bat-17.88-0.00085  Asahi-22.57-0.00107
+
+## running jobs on asahi/aarch64, emulated aarch64
+oneline aarchemu job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-19.0 Bat-39.79-0.21000 Asahi-11.27-0.05947
+oneline aarchemu job_httpd_extract_cpu.sh 1 looptime-300 runs-58 threads-1 timeperjob-5.3 Bat-18.87-0.02793 Asahi-18.71-0.02768
+oneline aarchemu job_httpd_extract_cpu.sh 2 looptime-300 runs-121 threads-2 timeperjob-5.2 Bat-23.65-0.01694 Asahi-24.90-0.01784
+oneline aarchemu job_httpd_extract_cpu.sh 4 looptime-300 runs-222 threads-4 timeperjob-5.6 Bat-34.49-0.01333 Asahi-37.49-0.01450
+oneline aarchemu job_httpd_extract_cpu.sh 8 looptime-300 runs-206 threads-8 timeperjob-12.3 Bat-41.47-0.01767 Asahi-36.57-0.01558
+
+## running jobs on RHEL AMD9.4, emulated on Asahi, Icelake-Server
+oneline amd94-emu-Icelake-Server job_sleep.sh 				  looptime-10  runs-1   threads-1 timeperjob-14.0  Bat-0.00-0.00000   Asahi-7.26-0.02822
+oneline amd94-emu-Icelake-Server job_io_read.sh looptime-300 results-506MB/s Bat-14.57 Asahi-5.69
+oneline amd94-emu-Icelake-Server job_io_write_nosync.sh looptime-300 results-224MB/s Bat-96.00 Asahi-8.76
+oneline amd94-emu-Icelake-Server job_io_write_sync.sh looptime-300 results-29.9MB/s Bat-96.00 Asahi-6.14
+oneline amd94-emu-Icelake-Server job_memwrite-128m-nosync.sh looptime-300 results-439 Bat-22.62 Asahi-13.17
+oneline amd94-emu-Icelake-Server job_memwrite-128m-sync.sh looptime-300 results-443 Bat-11.33 Asahi-13.32
+oneline amd94-emu-Icelake-Server job_memwrite-1024m-nosync.sh 	  looptime-300 results-63 						   Bat-10.30 		  Asahi-14.07
+oneline amd94-emu-Icelake-Server job_memwrite-1024m-sync.sh 		  looptime-300 results-63 						   Bat-11.37 		  Asahi-14.27
+oneline amd94-emu-Icelake-Server job_iperf3_4.1.sh 		  looptime-300 results-2510Mbits/sec-2510Mbits/sec Bat-28.80 		  Asahi-15.12
+oneline amd94-emu-Icelake-Server job_httpd_extract_cpu.sh 1  looptime-300 runs-66  threads-1 timeperjob-4.6   Bat-7.08-0.00909   Asahi-13.02-0.01671
+oneline amd94-emu-Icelake-Server job_httpd_extract_cpu.sh 2  looptime-300 runs-135 threads-2 timeperjob-4.6   Bat-23.77-0.01511  Asahi-20.20-0.01284
+oneline amd94-emu-Icelake-Server job_httpd_extract_cpu.sh 4  looptime-300 runs-263 threads-4 timeperjob-4.7   Bat-40.44-0.01316  Asahi-33.15-0.01078
+oneline amd94-emu-Icelake-Server job_httpd_extract_cpu.sh 8  looptime-300 runs-256 threads-8 timeperjob-9.8   Bat-31.62-0.01070  Asahi-33.23-0.01125
+
+## running jobs on rhel10/x86, emulated on Asahi: Haswell
+oneline amd10-emu-Haswell job_sleep.sh 				  looptime-10 runs-1 threads-1 timeperjob-14.0 		 Bat-0.00-0.00000 	Asahi-5.78-0.02247
+oneline amd10-emu-Haswell job_io_read.sh looptime-300 results-437MB/s Bat-108.00 Asahi-9.56
+oneline amd10-emu-Haswell job_io_write_nosync.sh looptime-300 results-424MB/s Bat-108.00 Asahi-11.03
+oneline amd10-emu-Haswell job_io_write_sync.sh looptime-300 results-272MB/s Bat-13.50 Asahi-7.34
+oneline amd10-emu-Haswell job_iperf3_4.1.sh 			  looptime-300 results-1930Mbits/sec-1930Mbits/sec 	 Bat-25.22 			Asahi-14.32
+oneline amd10-emu-Haswell job_memwrite-1024m-nosync.sh 	  looptime-300 results-69 							 Bat-24.16 			Asahi-13.52
+oneline amd10-emu-Haswell job_memwrite-1024m-sync.sh 		  looptime-300 results-68 							 Bat-13.74 			Asahi-14.25
+oneline amd10-emu-Haswell job_httpd_extract_cpu.sh 1  looptime-300 runs-76 threads-1 timeperjob-4.0 	 Bat-8.05-0.00895 	Asahi-13.65-0.01516
+oneline amd10-emu-Haswell job_httpd_extract_cpu.sh 2  looptime-300 runs-152 threads-2 timeperjob-4.0 	 Bat-18.41-0.01033  Asahi-20.37-0.01143
+oneline amd10-emu-Haswell job_httpd_extract_cpu.sh 4  looptime-300 runs-288 threads-4 timeperjob-4.2 	 Bat-33.52-0.00986  Asahi-32.83-0.00966
+oneline amd10-emu-Haswell job_httpd_extract_cpu.sh 8  looptime-300 runs-277 threads-8 timeperjob-8.9 	 Bat-29.24-0.00906 	Asahi-33.03-0.01023
+
+## running jobs on rhel10/x86, emulated on Asahi: Icelake-Server, virsh flags clean
+oneline amd10-emu-Icelake-Server job_sleep.sh 				  looptime-10 runs-1 threads-1 timeperjob-14.0 		 Bat-0.00-0.00000 	Asahi-6.03-0.02346
+oneline amd10-emu-Icelake-Server job_io_read.sh looptime-300 results-466MB/s Bat-126.00 Asahi-9.79
+oneline amd10-emu-Icelake-Server job_io_write_nosync.sh looptime-300 results-429MB/s Bat-5.14 Asahi-7.69
+oneline amd10-emu-Icelake-Server job_io_write_sync.sh looptime-300 results-266MB/s Bat-12.00 Asahi-11.17
+oneline amd10-emu-Icelake-Server job_memwrite-1024m-nosync.sh 	  looptime-300 results-71 							 Bat-13.03 			Asahi-13.50
+oneline amd10-emu-Icelake-Server job_memwrite-1024m-sync.sh 		  looptime-300 results-71 							 Bat-11.29 			Asahi-13.91
+oneline amd10-emu-Icelake-Server job_iperf3_4.1.sh 			  looptime-300 results-2010Mbits/sec-2010Mbits/sec 	 Bat-25.11 			Asahi-14.58
+oneline amd10-emu-Icelake-Server job_httpd_extract_cpu.sh 1  looptime-300 runs-75 threads-1 timeperjob-4.1 	 Bat-7.74-0.00880 	Asahi-13.40-0.01524
+oneline amd10-emu-Icelake-Server job_httpd_extract_cpu.sh 2  looptime-300 runs-149 threads-2 timeperjob-4.1 	 Bat-24.19-0.01389  Asahi-20.06-0.01152
+oneline amd10-emu-Icelake-Server job_httpd_extract_cpu.sh 4  looptime-300 runs-292 threads-4 timeperjob-4.2 	 Bat-36.94-0.01079 	Asahi-32.96-0.00963
+oneline amd10-emu-Icelake-Server job_httpd_extract_cpu.sh 8  looptime-300 runs-280 threads-8 timeperjob-8.9 	 Bat-29.77-0.00921  Asahi-33.27-0.01030
+
+## running jobs on rhel10/x86, emulated on Asahi: Icelake-Server-noTSX
+oneline amd10-emu-Icelake-Server-noTSX job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-13.0 Bat-49.85-0.18000 Asahi-8.20-0.02962
+oneline amd10-emu-Icelake-Server-noTSX job_io_read.sh looptime-300 results-437MB/s Bat-54.00 Asahi-11.38
+oneline amd10-emu-Icelake-Server-noTSX job_io_write_nosync.sh looptime-300 results-404MB/s Bat-150.00 Asahi-15.64
+oneline amd10-emu-Icelake-Server-noTSX job_io_write_sync.sh looptime-300 results-222MB/s Bat-44.00 Asahi-8.30
+oneline amd10-emu-Icelake-Server-noTSX job_memwrite-128m-nosync.sh looptime-300 results-488 Bat-13.03 Asahi-13.47
+oneline amd10-emu-Icelake-Server-noTSX job_memwrite-128m-sync.sh looptime-300 results-485 Bat-10.07 Asahi-12.36
+oneline amd10-emu-Icelake-Server-noTSX job_memwrite-1024m-nosync.sh looptime-300 results-69 Bat-12.79 Asahi-13.47
+oneline amd10-emu-Icelake-Server-noTSX job_memwrite-1024m-sync.sh looptime-300 results-69 Bat-12.98 Asahi-13.38
+oneline amd10-emu-Icelake-Server-noTSX job_iperf3_4.1.sh looptime-300 results-2190Mbits/sec-2190Mbits/sec Bat-9.80 Asahi-14.55
+oneline amd10-emu-Icelake-Server-noTSX job_httpd_extract_cpu.sh 1 looptime-300 runs-75 threads-1 timeperjob-4.1 Bat-6.68-0.00760 Asahi-12.85-0.01461
+oneline amd10-emu-Icelake-Server-noTSX job_httpd_extract_cpu.sh 2 looptime-300 runs-145 threads-2 timeperjob-4.2 Bat-28.03-0.01648 Asahi-21.70-0.01276
+oneline amd10-emu-Icelake-Server-noTSX job_httpd_extract_cpu.sh 4 looptime-300 runs-277 threads-4 timeperjob-4.4 Bat-33.19-0.01022 Asahi-34.05-0.01048
+oneline amd10-emu-Icelake-Server-noTSX job_httpd_extract_cpu.sh 8 looptime-300 runs-266 threads-8 timeperjob-9.3 Bat-29.22-0.00940 Asahi-33.61-0.01081
+
+## running jobs on rhel10/x86, emulated on Asahi: Broadwell-noTSX
+oneline amd10-emu-Broadwell-noTSX job_sleep.sh 				 looptime-10 runs-1 threads-1 timeperjob-14.0 	  Bat-0.00-0.00000 	Asahi-6.79-0.02642
+oneline amd10-emu-Broadwell-noTSX job_io_read.sh looptime-300 results-432MB/s Bat-78.55 Asahi-9.81
+oneline amd10-emu-Broadwell-noTSX job_io_write_nosync.sh looptime-300 results-393MB/s Bat-10.29 Asahi-5.59
+oneline amd10-emu-Broadwell-noTSX job_io_write_sync.sh looptime-300 results-243MB/s Bat-44.00 Asahi-8.48
+oneline amd10-emu-Broadwell-noTSX job_memwrite-1024m-nosync.sh 	 looptime-300 results-71 						  Bat-9.36 			Asahi-13.99
+oneline amd10-emu-Broadwell-noTSX job_memwrite-1024m-sync.sh 		 looptime-300 results-71 						  Bat-15.16 		Asahi-14.70
+oneline amd10-emu-Broadwell-noTSX job_iperf3_4.1.sh 		 looptime-300 results-2500Mbits/sec-2500Mbits/sec Bat-29.61 		Asahi-15.24
+oneline amd10-emu-Broadwell-noTSX job_httpd_extract_cpu.sh 1 looptime-300 runs-76 threads-1 timeperjob-4.0 	  Bat-6.85-0.00763  Asahi-13.88-0.01547
+oneline amd10-emu-Broadwell-noTSX job_httpd_extract_cpu.sh 2 looptime-300 runs-154 threads-2 timeperjob-4.0   Bat-24.74-0.01370 Asahi-19.72-0.01092
+oneline amd10-emu-Broadwell-noTSX job_httpd_extract_cpu.sh 4 looptime-300 runs-299 threads-4 timeperjob-4.1   Bat-39.04-0.01117 Asahi-33.45-0.00957
+oneline amd10-emu-Broadwell-noTSX job_httpd_extract_cpu.sh 8 looptime-300 runs-284 threads-8 timeperjob-8.7   Bat-30.16-0.00908 Asahi-33.91-0.01022
+
+## running jobs on rhel10/x86, emulated on Asahi: -cpu max
+oneline amd10-max job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-14.0 Bat-0.00-0.00000 Asahi-8.88-0.03452
+oneline amd10-max job_io_read.sh looptime-300 results-502MB/s Bat-25.41 Asahi-9.83
+oneline amd10-max job_io_write_nosync.sh looptime-300 results-292MB/s Bat-150.00 Asahi-12.55
+oneline amd10-max job_io_write_sync.sh looptime-300 results-112MB/s Bat-12.00 Asahi-10.64
+oneline amd10-max job_memwrite-128m-nosync.sh looptime-300 results-419 Bat-16.51 Asahi-15.53
+oneline amd10-max job_memwrite-128m-sync.sh looptime-300 results-416 Bat-13.31 Asahi-15.73
+oneline amd10-max job_memwrite-1024m-nosync.sh looptime-300 results-57 Bat-16.16 Asahi-16.76
+oneline amd10-max job_memwrite-1024m-sync.sh looptime-300 results-57 Bat-15.56 Asahi-17.05
+oneline amd10-max job_iperf3_4.1.sh looptime-300 results-1880Mbits/sec-1880Mbits/sec Bat-13.59 Asahi-16.23
+oneline amd10-max job_httpd_extract_cpu.sh 1 looptime-300 runs-77 threads-1 timeperjob-3.9 Bat-15.62-0.01701 Asahi-16.04-0.01747
+oneline amd10-max job_httpd_extract_cpu.sh 2 looptime-300 runs-185 threads-2 timeperjob-3.3 Bat-31.63-0.01449 Asahi-23.07-0.01056
+oneline amd10-max job_httpd_extract_cpu.sh 4 looptime-300 runs-411 threads-4 timeperjob-3.0 Bat-38.71-0.00798 Asahi-35.83-0.00739
+oneline amd10-max job_httpd_extract_cpu.sh 8 looptime-300 runs-384 threads-8 timeperjob-6.4 Bat-32.48-0.00721 Asahi-35.95-0.00798
+
+## running jobs on rhel7.9/x86, emulated on Asahi, -cpu qemu64
+oneline amd79-qemu64 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-12.0 Bat-0.00-0.00000 Asahi-8.42-0.02807
+oneline amd79-qemu64 job_io_read.sh looptime-300 results-2100MB/s Bat-41.54 Asahi-8.21
+oneline amd79-qemu64 job_io_write_nosync.sh looptime-300 results-562MB/s Bat-162.00 Asahi-18.09
+oneline amd79-qemu64 job_io_write_sync.sh looptime-300 results-122MB/s Bat-9.82 Asahi-11.78
+oneline amd79-qemu64 job_memwrite-128m-nosync.sh looptime-300 results-1039 Bat-16.09 Asahi-12.86
+oneline amd79-qemu64 job_memwrite-128m-sync.sh looptime-300 results-1009 Bat-10.85 Asahi-12.37
+oneline amd79-qemu64 job_memwrite-1024m-nosync.sh looptime-300 results-182 Bat-14.07 Asahi-15.05
+oneline amd79-qemu64 job_memwrite-1024m-sync.sh looptime-300 results-173 Bat-13.66 Asahi-13.65
+oneline amd79-qemu64 job_iperf3_4.1.sh looptime-300 results-8790Mbits/sec-8790Mbits/sec Bat-18.06 Asahi-17.37
+oneline amd79-qemu64 job_httpd_extract_cpu.sh 1 looptime-300 runs-75 threads-1 timeperjob-4.0 Bat-6.65-0.00747 Asahi-12.79-0.01435
+oneline amd79-qemu64 job_httpd_extract_cpu.sh 2 looptime-300 runs-188 threads-2 timeperjob-3.2 Bat-24.95-0.01117 Asahi-19.63-0.00879
+oneline amd79-qemu64 job_httpd_extract_cpu.sh 4 looptime-300 runs-456 threads-4 timeperjob-2.7 Bat-36.24-0.00669 Asahi-33.04-0.00610
+oneline amd79-qemu64 job_httpd_extract_cpu.sh 8 looptime-300 runs-439 threads-8 timeperjob-5.5 Bat-31.26-0.00601 Asahi-33.20-0.00639
+
+## running jobs on rhel7.9/x86, emulated on Asahi , -cpu max
+oneline amd79-max job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-12.0 Bat-12.00-0.04000 Asahi-10.34-0.03445
+oneline amd79-max job_io_read.sh looptime-300 results-460MB/s Bat-31.35 Asahi-11.13
+oneline amd79-max job_io_write_nosync.sh looptime-300 results-272MB/s Bat-180.00 Asahi-20.03
+oneline amd79-max job_io_write_sync.sh looptime-300 results-48.6MB/s Bat-180.00 Asahi-14.14
+oneline amd79-max job_memwrite-128m-nosync.sh looptime-300 results-575 Bat-21.03 Asahi-18.73
+oneline amd79-max job_memwrite-128m-sync.sh looptime-300 results-576 Bat-12.99 Asahi-18.46
+oneline amd79-max job_memwrite-1024m-nosync.sh looptime-300 results-81 Bat-18.00 Asahi-19.34
+oneline amd79-max job_memwrite-1024m-sync.sh looptime-300 results-81 Bat-16.81 Asahi-20.01
+oneline amd79-max job_iperf3_4.1.sh looptime-300 results-2850Mbits/sec-2850Mbits/sec Bat-16.28 Asahi-20.15
+oneline amd79-max job_httpd_extract_cpu.sh 1 looptime-300 runs-104 threads-1 timeperjob-2.9 Bat-15.33-0.01240 Asahi-17.66-0.01429
+oneline amd79-max job_httpd_extract_cpu.sh 2 looptime-300 runs-217 threads-2 timeperjob-2.8 Bat-21.27-0.00825 Asahi-23.85-0.00925
+oneline amd79-max job_httpd_extract_cpu.sh 4 looptime-300 runs-450 threads-4 timeperjob-2.7 Bat-28.75-0.00538 Asahi-35.68-0.00667
+oneline amd79-max job_httpd_extract_cpu.sh 8 looptime-300 runs-432 threads-8 timeperjob-5.6 Bat-32.20-0.00627 Asahi-35.56-0.00693
+
+						cpu-1 	cpu-2	cpu-4	cons-1	cons-2	cons-4	throughput		nosync	sync
+asahi-plain				504		991		1961	0.00152	0.00112	0.00090	74.2Gbits/sec	2190	2107
+asahi-virt				466		958		1909	0.00179	0.00124	0.00096	70.5Gbits/sec	1373	1393
+Icelake-Server			75		149		292		0.01524	0.01152	0.00963	2.01Gbits/sec	71		71		# generation from 2019
+Icelake-Server-noTSX
+Broadwell								95						0.00976									# generation from 2014
+Broadwell-noTSX			76		154		299		0.01547	0.01092	0.00957	2.50Gbits/sec	71		71
+Broadwell-noTSX-IBRS	76				293		0.01477			0.00977	1.38Gbits/sec	69		69
+Haswell					76		152		288		0.01516 0.01143 0.00966	1.93Gbits/sec	69		68		# generation from 2013
+Haswell-IBRS
+Haswell-noTSX
+Haswell-noTSX-IBRS
+
+https://www.qemu.org/docs/master/system/qemu-cpu-models.html
+/usr/bin/qemu-system-x86_64 -cpu help
+https://mail-index.netbsd.org/source-changes/2025/01/19/msg155256.html

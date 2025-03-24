@@ -1,0 +1,35 @@
+qemu-system-m68k -machine virt \
+ -drive file=NetBSD-10.99.12-virt68k-live.img,if=none,format=raw,id=disk \
+ -device virtio-blk-device,drive=disk \
+ -netdev user,id=net -device virtio-net-device,netdev=net \
+ -kernel netbsd.virt68k -append root=ld0 -nographic
+
+https://cdn.netbsd.org/pub/NetBSD/images/10.1/
+
+
+
+
+qemu-img create -f qcow2 netbsd.qcow2 16G
+qemu-system-x86_64 -accel kvm -cpu max -smp cpus=4 -m 4G \
+	-drive file=netbsd.qcow2,if=none,id=hd0,cache=unsafe \
+	-device virtio-blk-pci,drive=hd0								\
+	-cdrom NetBSD-10.1-amd64.iso									\
+	-netdev bridge,br=virbr0,id=n1 -device virtio-net,netdev=n1		\
+	-object rng-random,filename=/dev/urandom,id=viornd0				\
+	-device virtio-rng-pci,rng=viornd0								\
+	-boot order=d,c
+
+# https://www.netbsd.org/mirrors/#release-japan
+# PKG_PATH="http://ftp.NetBSD.org/pub/pkgsrc/packages/$(uname -s)/$(uname -m)/$(uname -r|cut -f '1 2' -d.)/All"
+PKG_PATH="https://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/amd64/10.1/All/"
+export PKG_PATH
+pkg_add -v tmux sudo pkgin bash iperf3
+
+pkin search python
+pkin install python313
+ln -s /usr/pkg/bin/python3.13 /usr/bin/python
+
+mkdir /dev/shm
+mount_mfs -s 200m -u chris swap /dev/shm
+
+

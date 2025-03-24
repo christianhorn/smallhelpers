@@ -1,0 +1,49 @@
+https://wiki.netbsd.org/ports/sparc/
+
+
+
+qemu-img create -f qcow2 netbsd.qcow2 16G
+
+
+qemu-system-sparc -M SS-20 -smp cpus=4 -m 2048 \
+  -drive file=NetBSD-10.1-sparc.iso,bus=0,unit=2,media=cdrom,readonly=on \
+  -drive file=netbsd.qcow2,bus=0,unit=0,media=disk \
+  -net tap -net nic,macaddr=02:25:45:67:89:01 \
+  -boot d -nographic
+  # -vnc 0.0.0.0:42 \
+
+[chris@космос ~]$ cat /etc/qemu-ifup
+#!/bin/sh
+set -x
+
+switch=virbr0
+
+if [ -n "$1" ];then
+    ip tuntap add $1 mode tap user `whoami`
+    ip link set $1 up
+    sleep 0.5s
+    ip link set $1 master $switch
+    exit 0
+else
+    echo "Error: no interface specified"
+    exit 1
+fi
+[chris@космос ~]$
+
+
+
+
+
+
+PKG_PATH="http://ftp.NetBSD.org/pub/pkgsrc/packages/$(uname -s)/$(uname -m)/$(uname -r|cut -f '1 2' -d.)/All"
+export PKG_PATH
+pkg_add -v tmux sudo pkgin bash iperf3
+
+pkgin search python
+pkgin install python313
+ln -s /usr/pkg/bin/python3.12 /usr/bin/python
+
+mkdir /dev/shm
+mount_mfs -s 200m -u chris swap /dev/shm
+
+

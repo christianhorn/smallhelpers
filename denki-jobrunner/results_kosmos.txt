@@ -1,0 +1,31 @@
+
+## running jobs on kosmos/bare metal directly
+    oneline kosmos-baremetal job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-17.0 RaplMSR-11.12-0.05250
+    oneline kosmos-baremetal job_httpd_extract_cpu.sh 1 looptime-300 runs-297 threads-1 timeperjob-1.0 RaplMSR-20.97-0.00600
+    oneline kosmos-baremetal job_httpd_extract_cpu.sh 2 looptime-300 runs-452 threads-2 timeperjob-1.4 RaplMSR-21.34-0.00401
+    oneline kosmos-baremetal job_httpd_extract_cpu.sh 4 looptime-300 runs-647 threads-4 timeperjob-1.9 RaplMSR-22.78-0.00300
+    oneline kosmos-baremetal job_httpd_extract_cpu.sh 8 looptime-300 runs-769 threads-8 timeperjob-3.2 RaplMSR-23.05-0.00256
+
+## running jobs on kosmos/virt fedora41
+    oneline virt-amdf41 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-16.0 RaplMSR-9.94-0.04417
+    oneline virt-amdf41 job_httpd_extract_cpu.sh 1 looptime-300 runs-284 threads-1 timeperjob-1.1 RaplMSR-21.25-0.00636
+    oneline virt-amdf41 job_httpd_extract_cpu.sh 2 looptime-300 runs-412 threads-2 timeperjob-1.5 RaplMSR-21.68-0.00447
+    oneline virt-amdf41 job_httpd_extract_cpu.sh 4 looptime-300 runs-612 threads-4 timeperjob-2.0 RaplMSR-22.97-0.00319
+    oneline virt-amdf41 job_httpd_extract_cpu.sh 8 looptime-300 runs-536 threads-8 timeperjob-4.6 RaplMSR-22.82-0.00364
+
+## running jobs on kosmos/emulated aarch64 fedora41 server KVM img
+    oneline emu-aarch64 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-11.0 RaplMSR-11.09-0.03389
+    oneline emu-aarch64 job_httpd_extract_cpu.sh 1 looptime-300 runs-22 threads-1 timeperjob-13.7 RaplMSR-21.65-0.08230
+    oneline emu-aarch64 job_httpd_extract_cpu.sh 2 looptime-300 runs-30 threads-2 timeperjob-20.9 RaplMSR-21.53-0.06259
+    oneline emu-aarch64 job_httpd_extract_cpu.sh 4 looptime-300 runs-29 threads-4 timeperjob-44.7 RaplMSR-23.27-0.07222
+    oneline emu-aarch64 job_httpd_extract_cpu.sh 8 looptime-300 runs-24 threads-8 timeperjob-113.7 RaplMSR-24.65-0.09728
+
+## running jobs on kosmos/emulated amd64 fedora41 server KVM img
+    oneline emu-amd64 job_sleep.sh looptime-10 runs-1 threads-1 timeperjob-11.0 RaplMSR-13.00-0.03972
+    oneline emu-amd64 job_httpd_extract_cpu.sh 1 looptime-300 runs-25 threads-1 timeperjob-12.4 RaplMSR-25.04-0.08651
+    oneline emu-amd64 job_httpd_extract_cpu.sh 2 looptime-300 runs-38 threads-2 timeperjob-16.1 RaplMSR-24.68-0.05503
+    oneline emu-amd64 job_httpd_extract_cpu.sh 4 looptime-300 runs-60 threads-4 timeperjob-21.1 RaplMSR-23.93-0.03501
+    oneline emu-amd64 job_httpd_extract_cpu.sh 8 looptime-300 runs-48 threads-8 timeperjob-55.7 RaplMSR-24.46-0.04727
+
+### NEW TODO
+- run on asahi aarch64 emulated

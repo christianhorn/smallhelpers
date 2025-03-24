@@ -1,0 +1,29 @@
+https://wiki.netbsd.org/ports/evbarm/qemu_arm/
+https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.1/evbarm-aarch64/INSTALL.html
+
+
+rm -f netbsd.qcow2
+qemu-img create -f qcow2 netbsd.qcow2 16G
+qemu-system-aarch64 -M virt -cpu cortex-a53 -smp 4 -m 4g \
+	-drive if=none,file=netbsd.qcow2,id=hd0 -device virtio-blk-device,drive=hd0 \
+	-netdev bridge,br=virbr0,id=n1 -device virtio-net,netdev=n1 \
+	-bios QEMU_EFI.fd \
+	-object rng-random,filename=/dev/urandom,id=viornd0				\
+	-device virtio-rng-pci,rng=viornd0								\
+	-cdrom NetBSD-10.1-evbarm-aarch64.iso -nographic -boot c,d
+
+
+
+# https://www.netbsd.org/mirrors/#release-japan
+# PKG_PATH="http://ftp.NetBSD.org/pub/pkgsrc/packages/$(uname -s)/$(uname -m)/$(uname -r|cut -f '1 2' -d.)/All"
+# PKG_PATH="https://cdn.NetBSD.org/pub/pkgsrc/packages/$(uname -s)/$(uname -m)/$(uname -r|cut -f '1 2' -d.)/All"
+PKG_PATH="https://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/aarch64/10.1/All/"
+export PKG_PATH
+pkg_add -v tmux sudo pkgin bash iperf3
+
+pkgin search python
+pkgin install python313
+ln -s /usr/pkg/bin/python3.13 /usr/bin/python
+
+mkdir /dev/shm
+mount_mfs -s 200m -u chris swap /dev/shm

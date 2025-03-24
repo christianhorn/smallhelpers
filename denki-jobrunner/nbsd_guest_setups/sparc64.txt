@@ -1,0 +1,74 @@
+https://wiki.netbsd.org/ports/evbarm/qemu_arm/
+https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.1/evbarm-aarch64/INSTALL.html
+
+
+
+qemu-img create -f qcow2 netbsd.qcow2 16G
+qemu-system-sparc64 -cdrom NetBSD-10.1-sparc64.iso \
+	-smp 1 -nic bridge,br=virbr0,model=ne2k_pci \
+	-hda netbsd.qcow2 -nographic -m 2048 -boot d
+
+
+qemu-system-sparc64 \
+	-nic bridge,br=virbr0,model=ne2k_pci \
+	-nographic -m 2048 \
+	-drive file=netbsd.qcow2,if=none,id=hd0,cache=unsafe \
+	-device ide-hd,drive=hd0
+
+
+# no disks found
+qemu-system-sparc64 \
+	-nic bridge,br=virbr0,model=ne2k_pci \
+	-nographic -m 2048 \
+	-drive file=netbsd.qcow2,if=none,id=hd \
+	-device virtio-blk-pci,bus=pciB,drive=hd \
+	-drive file=NetBSD-10.1-sparc64.iso,format=raw,if=ide,bus=1,unit=0,media=cdrom,readonly=on
+
+
+
+# https://www.netbsd.org/mirrors/#release-japan
+# PKG_PATH="https://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/amd64/10.1/All/"
+PKG_PATH="http://ftp.NetBSD.org/pub/pkgsrc/packages/$(uname -s)/$(uname -m)/$(uname -r|cut -f '1 2' -d.)/All"
+export PKG_PATH
+pkg_add -v tmux sudo pkgin bash iperf3
+
+pkgin search python
+pkgin install python313
+ln -s /usr/pkg/bin/python3.13 /usr/bin/python
+
+mkdir /dev/shm
+mount_mfs -s 128m -u chris /dev/shm
+
+
+## nbsd 10.1
+no pkg_add possible, ide issue:
+
+cmdide0:0:0: lost interrupt
+[ 892.3624136] 	type: ata tc_bcount: 16384 tc_skip: 0
+cmdide0:0:0: lost interrupt
+[ 902.3624024] 	type: ata tc_bcount: 16384 tc_skip: 0
+cmdide0:0:0: lost interrupt
+[ 912.3624064] 	type: ata tc_bcount: 16384 tc_skip: 0
+
+https://gnats.netbsd.org/54035
+https://mail-index.netbsd.org/netbsd-users/2010/06/23/msg006467.html
+<@logix:#NetBSD> it seems to get triggered *far* slower/later if you disable network (ifconfig down is sufficient), but even with that it usually happened in my tests after some time
+
+
+
+## nbsd 6.1.3, install iso boot
+
+FATAL: boot device not found, check your firmware settings!
+root device: qemu-system-sparc64: terminating on signal 15 from pid 77196 ()
+
+
+## nbsd 8,3
+cd source or http source, installer, driver model=ne2k_pci:
+progress: writing 65536 bytes to output pipe: Interrupted system call
+
+ne0: device timeout
+ne0: device timeout
+ne0: device timeout
+ne0: device timeout
+
+cd source or http source, installer, driver model=e1000:
