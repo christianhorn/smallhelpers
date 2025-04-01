@@ -73,6 +73,7 @@ echo '@ summary.rapl.msr Power averaged' >>help
 echo 'Power averaged' >>help
 
 cp ~chris/Downloads/bumblebee-status-msrpower-metric/pmns .
+systemctl enable --now pmie
 ./Install
 ```
 
