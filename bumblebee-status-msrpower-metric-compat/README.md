@@ -27,10 +27,6 @@ cd /opt
 git clone https://github.com/tobi-wan-kenobi/bumblebee-status
 ```
 
-PCP pmda-denki is not yet able to read MSR registers, that's requested 
-[in this pull request](https://github.com/performancecopilot/pcp/pull/2106).
-As a workaround, you can build PCP with that PR.
-
 Once the request is accepted, do a normal setup of PCP with pmda-denki, for example on Fedora 
 or RHEL:
 ```
