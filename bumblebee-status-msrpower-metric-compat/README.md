@@ -8,7 +8,11 @@ bumblebee-status bar.
 The 'battery' module already has a setting to show consumption, but it's
 not using the cpus MSR-register as source.
 
-This here is the newer version, it relies on pcp-pmda-summary.
+This compat-version here can be used without pcp-pmda-summary.  The downsides:
+- every time bumblebee-status requests the consumption, the query via
+  pmrep takes 3 seconds.  This is because the underlying PCP metric is a counter
+  and we need 2 values so we can compute the difference and thus the consumption.
+- consumption just averaged over 3 seconds
 
 The MSR-registers can not be read by normal users, I'm using Performance
 Co-Pilot (PCP) to read the metric, and then get it from there.
@@ -30,7 +34,7 @@ As a workaround, you can build PCP with that PR.
 Once the request is accepted, do a normal setup of PCP with pmda-denki, for example on Fedora 
 or RHEL:
 ```
-dnf install pcp pcp-pmda-denki pcp-pmda-summary
+dnf install pcp pcp-pmda-denki
 systemctl enable --now pmcd
 cd /var/lib/pcp/pmdas/denki
 ./Install
@@ -55,37 +59,7 @@ If that looks good, setup the module:
 cd ~/Downloads
 git clone https://github.com/christianhorn/smallhelpers
 mkdir -p ~/.config/bumblebee-status/modules
-cp smallhelpers/bumblebee-status-msrpower-metric/msrpower.py ~/.config/bumblebee-status/modules/
-```
-
-Now as root, setup pmda-summary.  It will do caching of the denki.rapl.msr
-metrics for us, so we can then query a metric which can immediately return
-a value.  First, add the following 2 lines to /etc/pcp/summary/expr.pmie:
-```
-summary.rapl.msr =
-           denki.rapl.msr #'psys_energy';
-```
-
-Then execute these steps as root:
-```
-cd /usr/libexec/pcp/pmdas/summary/
-echo '@ summary.rapl.msr Power averaged' >>help
-echo 'Power averaged' >>help
-
-cp ~chris/Downloads/bumblebee-status-msrpower-metric/pmns .
-./Install
-```
-
-When asked for a a timespan, hit "return".  Then we can query the new
-metric:
-```
-[chris@космос ~]$ pmrep summary.rapl.msr
-  s.r.msr
-    / sec
-    9.701
-    9.701
-    9.701
-    9.701
+cp smallhelpers/umblebee-status-msrpower-metric-compat/msrpower.py ~/.config/bumblebee-status/modules/
 ```
 
 Modify sway config:
@@ -134,3 +108,11 @@ on the command line.
 * This code might also fit as extension of the existing 'battery' module, 
   but as PCP is required here for actually reading the metric, I feel like
   that's to specific to be added to 'battery'.
+* We can not just read the value from pmcd (i.e. with 'pminfo -f'), but we
+  are looking here at a counter at 2 points in time, and are interested in
+  the change.  Right now, we just execute 'pmrep' to read 2 samples of the
+  metric, but that's just giving us an idea of the consumption in these
+  3 seconds.  If status bar updates this all 60seconds, then we are
+  57sec blind regarding consumption.  We could also read the values directly
+  in the module - would get much smaller blind-window then, but we would
+  then need the user to access the MSR registers directly.

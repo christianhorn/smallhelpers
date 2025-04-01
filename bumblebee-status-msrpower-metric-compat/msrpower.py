@@ -18,8 +18,7 @@ class Module(core.module.Module):
 
     def msrpower(self, widgets):
         # return "42"
-        # output = subprocess.getoutput("pmrep denki.rapl.msr -i psys_energy -t 3 -s 2 | tail -n 1")
-        output = subprocess.getoutput("pminfo -f summary.rapl.msr|tail -1|cut  -b 11-15")
+        output = subprocess.getoutput("pmrep denki.rapl.msr -i psys_energy -t 3 -s 2 | tail -n 1")
         # strip whitespaces, convert to proper float, then to integer
         output = int(float(output.strip()))
         # return 'Cons ' + str(output) + 'W'
