@@ -27,7 +27,7 @@ root-directory, to use the static data:
 ```
 cd /usr/libexec/pcp/pmdas/denki
 vi Install
-// args="-U root -D appl0 -r /home/chris/Downloads/tmpdir"
+Use something like this: args="-U root -D appl0 -r /home/chris/Downloads/tmpdir"
 ./Install
 ```
 
