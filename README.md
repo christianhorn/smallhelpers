@@ -11,6 +11,8 @@ Helper scripts.
   the energy consumption.  This is to be executed on a 'control system',
   which has Ansible-engine installed.
 * openmetrics: scripts for pmda-openmetrics
+* qemu-kvm-handover: construction site for transferring power to
+  KVM guests
 * pmda-denki-handbook: moved to 
   [here in html](https://fluxcoil.net/files/pmda-denki-handbook-publish/denki.html)
   and [here as pdf](https://fluxcoil.net/files/pmda-denki-handbook-publish/denki.pdf)
