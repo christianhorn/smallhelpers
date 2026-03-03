@@ -22,19 +22,22 @@ simply getting attributed to all of the processes.
   pmda-linux provides details on how many userland computations the
   currently running processes did, the overall electrical consumption
   is then accordingly attributed to single processes.
-* As per above, pmda-denki and pmda-linux need to be installed.
-  This code is then writing the computed attribution-data into file
-  /tmp/openmetrics_power from where pmda-openmetrics can read it.
+* some PMDA's are required:
+  * pmda-linux, it provides data on used userland cpu cycles
+  * pmda-denki, on Intel systems it will provide RAPL readings
+  * pmda-lmsensors, on Apple Silicon Mac with Asahi this will
+    provide power consumption metrics
+  * pmda-openmetrics for getting the data back into PCP.
 * With that, the power-attribution-metrics are available in pmcd,
   and can for example be visualized.
 
 ## Installation
 
-For example on Fedora41:
+For example on Fedora43:
 ```
 # (optional)
 #  Install pmda-denki version which can provide Intel MSR power
-#  metrics, https://github.com/performancecopilot/pcp/pull/2106
+#  metrics, 
 
 # Setup pcp with pmlogger and pmdas, i.e. in execute
 dnf -y install pcp-zeroconf pcp-pmda-denki pcp-pmda-openmetrics \
@@ -47,72 +50,35 @@ cd /usr/libexec/pcp/pmdas/openmetrics && ./Install
 # about power consumption of the processes to the terminal:
 ./power.py
 # Example:
-The processes consumed this many userland shares: 14519400
+Sleeping  10 sec..
+The processes consumed this many userland shares: 2200
 New processes which appeared: 0
-System consumption, calculated based on RAPL MSR: 5.60 W
-System consumption, calculated based on power_now:: 0.00 W
+System consumption: 8.20 W
 
 +-- process consumption share from overall consumption
-|	+-- process energy consumption based on bat-powernow metric
-|	|	+-- process energy consumption based on RAPL MSR metric
-|	|	|	   +-- process pid and command
-|	|	|	   |
-1 %	 0.00 W	 0.06 W	 alacritty
-1 %	 0.00 W	 0.06 W	 pipewire
-1 %	 0.00 W	 0.06 W	 pipewire-pulse
-1 %	 0.00 W	 0.06 W	 swaybar
-1 %	 0.00 W	 0.06 W	 valkey-server
-2 %	 0.00 W	 0.11 W	 steamwebhelper
-4 %	 0.00 W	 0.22 W	 steam
-5 %	 0.00 W	 0.28 W	 sway
-13 %	 0.00 W	 0.73 W	 python3
-60 %	 0.00 W	 3.36 W	 firefox
-
-# Verify file /tmp/openmetrics_power got created
-ls -al /tmp/openmetrics_power
-
-# Configure openmetrics
-echo 'file:///tmp/openmetrics_power' > \
-    /var/lib/pcp/pmdas/openmetrics/config.d/procpower.url
-cd /var/lib/pcp/pmdas/openmetrics
-./Install
-
-# Verify the new metrics appeared
-$ pminfo openmetrics.procpower
-openmetrics.procpower.powerbatfull
-openmetrics.procpower.powermsrfull
-openmetrics.procpower.powerbat
-openmetrics.procpower.powermsr
-
-# Configure pmlogger to also capture openmetrics, # i.e. change last 
-# part of /var/lib/pcp/config/pmlogger/config.default :
+|	 +-- process energy consumption
+|	 |	     +-- process pid and command
+|	 |	     |
+1 %	 0.1 W	 sway
+1 %	 0.1 W	 /usr/lib64/firefox/firefox -contentproc
+1 %	 0.1 W	 swaybar -b
+1 %	 0.1 W	 /usr/lib64/firefox/firefox -contentproc
+1 %	 0.1 W	 /usr/bin/python3 ./power7.py
+1 %	 0.1 W	 /usr/lib64/firefox/firefox -contentproc
+1 %	 0.1 W	 dbus-broker --log
+1 %	 0.1 W	 /opt/google/chrome/chrome --type=gpu-process
+1 %	 0.1 W	 /usr/lib64/firefox/firefox -contentproc
+1 %	 0.1 W	 vim README.md
+3 %	 0.2 W	 /usr/lib64/firefox/firefox
+7 %	 0.6 W	 /usr/libexec/upowerd
+10 % 0.8 W	 alacritty
+22 % 1.8 W	 python3 /opt/bumblebee-status/bumblebee-status
+28 % 2.3 W	 /usr/lib64/firefox/firefox -contentproc
 [..]
-log advisory on 10sec {
-	openmetrics
-	denki
-}
-
-[access]
-disallow .* : all;
-disallow :* : all;
-allow local:* : enquire;
-
-# restart pmlogger
-systemctl restart pmlogger
 ```
 
-With that, metrics below openmetrics.procpower are usable, i.e. for
-grafana visualization.
-
 ## Bugs/Future
-* fetch consumption metric as float?
-* if looking at gauge metric like battery-power-now, we only 
-  consider the last value right now.
-* we do not catch shortlived processes, living between start/end.
-  Consider to check in 10sec intervals?  Will increase load caused
-  by the script though.
-* lookup specifics of proc.psinfo.utime source, consider to add
-  kernel land load
-* With Grafana visualization: even when processes are killed, they stay
-  in the Grafana graph as line.  Restarting pmlogger to start a new
-  archive fixes this.. but is no proper solution.
+- if looking at gauge metric like battery-power-now, we only 
+  consider single values. Higher frequency means higher accuracy
+- we do not catch shortlived processes, living between start/end
+- lookup specifics of proc.psinfo.utime source

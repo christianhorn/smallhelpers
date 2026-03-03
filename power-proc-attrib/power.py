@@ -10,18 +10,28 @@ import re
 # Christian Horn <chorn@fluxcoil.net>
 # GPLv2
 #
-# TODO: fetch consumption metric as float
-#	   if looking at gauge metric like battery-power-now, we only
-#		   consider the last value right now.
-#	   we do not catch shortlived processes, living between start/end
-#	   lookup specifics of proc.psinfo.utime source
+# TODO: 
+# - if looking at gauge metric like battery-power-now, we only consider single values.
+#	Higher frequency means higher accuracy
+# - we do not catch shortlived processes, living between start/end
+# - lookup specifics of proc.psinfo.utime source
+# - sometimes, "The processes consumed this many userland shares: -3120" is reported
 
-measuretime = 5
-
-procdict = {}
-procdictold = {}
+measuretime = 10
 denkivar = 0
 consumptionpowernow = 0
+
+pidutime = {}
+pidutimeold = {}
+pidpsargs = {}
+
+def check_metric_exists(metric_name):
+	try:
+		ctx = pmapi.pmContext(c_api.PM_CONTEXT_HOST, "local:")
+		pmids = ctx.pmLookupName([metric_name])
+		return True
+	except pmapi.pmErr:
+		return False
 
 def fetchall():
 	global denkivar
@@ -29,29 +39,94 @@ def fetchall():
 
 	# Setup context, initiate fetching
 	ctx = pmapi.pmContext()
-	pmids = ctx.pmLookupName('proc.psinfo.utime')
+	utimemetrics = [
+		'proc.psinfo.pid',
+		'proc.psinfo.utime',
+		'proc.psinfo.psargs'
+	]
+	pmids = ctx.pmLookupName(utimemetrics)
 	descs = ctx.pmLookupDescs(pmids)
 	results = ctx.pmFetch(pmids)
-	allpids = ctx.pmGetInDom(descs[0])[1]
 
-	# Fetch energy-value for rapl-msr-psys_energy
-	denkipmids = ctx.pmLookupName('denki.rapl.msr')
-	denkidescs = ctx.pmLookupDescs(denkipmids)
-	denkiresults = ctx.pmFetch(denkipmids)
-	atom = ctx.pmExtractValue(denkiresults.contents.get_valfmt(0),
-		denkiresults.contents.get_vlist(0, 4), denkidescs[0].contents.type,
-		c_api.PM_TYPE_U32)
-	denkivar = atom.ul
+	# TODO: would be nice if we could go without this loop.
+	# Currently we need it to get the elements in all 3 lists to match up.
+	while ( ( results.contents.get_numval(0) != results.contents.get_numval(1) ) or 
+			( results.contents.get_numval(0) != results.contents.get_numval(2) ) ):
+		print("### Fetching data again ###")
+		time.sleep(1)
+		results = ctx.pmFetch(pmids)
 
 	# Take snapshot of the userland-counters of all processes
-	cnt = 0
-	for process in allpids:
-		atom = ctx.pmExtractValue(results.contents.get_valfmt(0),
-			results.contents.get_vlist(0, cnt), descs[0].contents.type,
+	for line in range( results.contents.get_numval(0) ):
+		# grab the pid, we need it as key for the dicts
+		atom = ctx.pmExtractValue(
+			results.contents.get_valfmt(0),
+			results.contents.get_vlist(0, line),
+			descs[0].contents.type,
+			c_api.PM_TYPE_U32
+		)
+		pid = atom.ul
+
+		# grab the utime
+		atom = ctx.pmExtractValue(
+			results.contents.get_valfmt(1),
+			results.contents.get_vlist(1, line),
+			descs[1].contents.type,
+			c_api.PM_TYPE_U32
+		)
+		utime = atom.ul
+
+		# grab the process details.  We need these to construct a proper identifier.
+		# Simple pid's will get reused, but "pid / command string" not.
+		atom = ctx.pmExtractValue(
+			results.contents.get_valfmt(2),
+			results.contents.get_vlist(2, line),
+			descs[2].contents.type,
+			c_api.PM_TYPE_STRING
+		)
+		psargs = atom.cp.decode('utf-8')
+
+		# print(f"{pid} / {utime} / {psargs}")
+		pidutime[pid] = utime
+		pidpsargs[pid] = psargs
+
+	# Fetch energy-value
+	if (powermetric == 'lmsensors.macsmc_hwmon_isa_0000.total_system_power'):
+		denkipmids = ctx.pmLookupName('lmsensors.macsmc_hwmon_isa_0000.total_system_power')
+		denkidescs = ctx.pmLookupDescs(denkipmids)
+		denkiresults = ctx.pmFetch(denkipmids)
+		atom = ctx.pmExtractValue(denkiresults.contents.get_valfmt(0),
+			denkiresults.contents.get_vlist(0, 0), denkidescs[0].contents.type,
+			c_api.PM_TYPE_FLOAT)
+		denkivar = atom.f
+
+	if (powermetric == 'denki.rapl.msr'):
+		denkipmids = ctx.pmLookupName('denki.rapl.msr')
+		denkidescs = ctx.pmLookupDescs(denkipmids)
+		denkiresults = ctx.pmFetch(denkipmids)
+		atom = ctx.pmExtractValue(denkiresults.contents.get_valfmt(0),
+			denkiresults.contents.get_vlist(0, 4), denkidescs[0].contents.type,
 			c_api.PM_TYPE_U32)
-		cnt += 1
-		if atom.ul != 0:
-			procdict[process] = atom.ul
+		denkivar = atom.ul
+
+# Initialization
+
+powermetric = 'none'
+if check_metric_exists('lmsensors.macsmc_hwmon_isa_0000.total_system_power'):
+	print("Metric lmsensors.macsmc_hwmon_isa_0000.total_system_power was found, using that.")
+	powermetric = 'lmsensors.macsmc_hwmon_isa_0000.total_system_power'
+	# This metric is a gauge, no counter
+	powermetricgauge = 1
+
+if check_metric_exists('denki.rapl.msr'):
+	print("Metric denki.rapl.msr was found, using that.")
+	powermetric = 'denki.rapl.msr'
+	# This metric is a counter
+	powermetricgauge = 0
+
+if ( powermetric == 'none' ): 
+	print("No usable power consumption metrics found!")
+	exit()
 
 fetchall()
 
@@ -60,58 +135,66 @@ while True:
 	time.sleep(measuretime)
 	
 	# copy over all data, for next cycle
-	procdictold = procdict.copy()
+	pidutimeold = pidutime.copy()
 	denkivarold = denkivar
 
-	procdict = {}
+	pidutime = {}
 	fetchall()
 
 	# Create a summary for each process name, i.e. count up
 	# multiple firefox threads
-	procshortdict = {}
+	# procshortdict = {}
 	userlandsum = 0
 	newprocs = 0
-	for process in procdict.keys():
-		if procdict[process] != 0:
-			if process in procdictold:
-				if procdict[process] != procdictold[process]:
-					procshort = re.sub('/.*/','',process)
-					procshort = re.sub('^.* ','',procshort)
-					procshort = re.sub('^./','',procshort)
-					if procshort in procshortdict:
-						procshortdict[procshort] += procdict[process] - procdictold[process]
-					else:
-						procshortdict[procshort] = procdict[process] - procdictold[process]
-					userlandsum += procdict[process] - procdictold[process]
-			else:
-				newprocs += 1
+
+	for pid in pidutime.keys():
+		if pid in pidutimeold:
+			if pidutime[pid] != pidutimeold[pid]:
+				userlandsum += pidutime[pid] - pidutimeold[pid]
+		else:
+			newprocs += 1
 
 	print("The processes consumed this many userland shares:",userlandsum)
 	print("New processes which appeared:",newprocs)
 	
-	if denkivar > denkivarold:
-		consumptionmsr = (denkivar - denkivarold)/measuretime
-	print("System consumption, calculated based on RAPL MSR:",
-		"{:2.2f}".format(consumptionmsr),"W")
+	if (powermetricgauge == 0):
+		# We have a counter metric, need to compute
+		if denkivar > denkivarold:
+			poweraverage = (denkivar - denkivarold)/measuretime
+	else:
+		# We have a gauge metric, no need to compute
+		poweraverage = denkivar
+
+	print("System consumption:", "{:2.2f}".format(poweraverage),"W")
 	
 	# So, how many percent of the overall shares had each process?
 	procpercent = {}
-	procconsumedmsr = {}
-	for key in procshortdict.keys():
-		procpercent[key] = int( 100 * procshortdict[key] / userlandsum)
-		procconsumedmsr[key] = procpercent[key] * consumptionmsr / 100
+	procconsumed = {}
+	for pid in pidutime.keys():
+		if pid in pidutimeold:
+			if pidutime[pid] != pidutimeold[pid]:
+				pidutimediff = pidutime[pid] - pidutimeold[pid]
+				procpercent[pid] = int( 100 * pidutimediff / userlandsum)
+				procconsumed[pid] = procpercent[pid] * poweraverage / 100
+				# print(f"procpercent {procpercent[pid]} / diif {pidutimediff} psargs {pidpsargs[pid]}")
+				# print(f"procpercent {procpercent[pid]} / diif {pidutimediff}")
+
 	
 	sorted_items = sorted(procpercent.items(), key=lambda kv: (kv[1], kv[1]))
 	
 	print("")
 	print("+-- process consumption share from overall consumption")
-	print("|	 +-- process energy consumption based on RAPL MSR metric")
+	print("|	 +-- process energy consumption")
 	print("|	 |	 +-- process pid and command")
 	print("|	 |	 |")
 	for key in sorted_items:
-		# print(key)
-		# print(key[1],"%\t",key[0])
 		if key[1] >= 1:
+			# trim down command to one or 2 strings
+			resu = pidpsargs[key[0]].split(' ')
+			if ( len(resu) > 1 ):
+				myresu = f"{resu[0]} {resu[1]}"
+			else:
+				myresu = resu[0]
 			print(key[1],"%\t",
-				"{:2.2f}".format(procconsumedmsr[key[0]]),"W\t",key[0])
-
+				"{:2.1f}".format(procconsumed[key[0]]),"W\t",myresu)
+#				"{:2.1f}".format(procconsumed[key[0]]),"W\t",pidpsargs[key[0]][:80])
