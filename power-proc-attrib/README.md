@@ -74,7 +74,7 @@ sudo systemctl status denkid
 ls -al /tmp/openmetrics_power.txt
 
 # Let's then instruct openmetrics to pick that up
-sudo cp openmetrics-power.url /var/lib/pcp/pmdas/openmetrics/config.d/
+sudo cp openmetrics-power.url /var/lib/pcp/pmdas/openmetrics/config.d/power.url
 ```
 
 With that, the metrics should become available from pmcd:
