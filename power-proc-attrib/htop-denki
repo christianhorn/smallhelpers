@@ -1,0 +1,53 @@
+#
+# pcp-htop(1) configuration file - see pcp-htop(5)
+#
+
+[denki]
+heading = Denki-power
+caption = Power consumption per process
+default = true
+
+power_proc_consumed.heading = W-consumed
+power_proc_consumed.caption = Watt by process
+power_proc_consumed.metric = openmetrics.power.proc.consumed
+power_proc_consumed.width = 12
+
+power_proc_percent.heading = %-consumed
+power_proc_percent.caption = Percent of overall consumption
+power_proc_percent.metric = openmetrics.power.proc.consumedpercent
+# power_proc_percent.format = percent
+power_proc_percent.width = 12
+
+#user_cpu.heading = UTIME
+#user_cpu.caption = User CPU Time
+#user_cpu.metric = 1000 * rate(cgroup.cpu.stat.user)
+#user_cpu.width = 6
+
+# system_cpu.heading = STIME
+# system_cpu.caption = Kernel CPU Time
+# system_cpu.metric = 1000 * rate(cgroup.cpu.stat.system)
+# system_cpu.width = 6
+# 
+# cpu_usage.heading = CPU%
+# cpu_usage.caption = CPU Utilization
+# cpu_usage.metric = 100 * (rate(cgroup.cpu.stat.usage) / hinv.ncpu)
+# cpu_usage.format = percent
+# 
+# cpu_psi.heading = CPU-PSI
+# cpu_psi.caption = CPU Pressure Stall Information
+# cpu_psi.metric = 1000 * rate(cgroup.pressure.cpu.some.total)
+# cpu_psi.width = 7
+
+name.heading = Process
+name.caption = Process consuming energy
+name.width = -64
+name.metric = openmetrics.power.proc.consumed
+name.instances = true
+# name.format = cgroup
+
+#name.heading = Control group
+#name.caption = Control group name
+#name.width = -64
+#name.metric = cgroup.cpu.stat.system
+#name.instances = true
+#name.format = cgroup

@@ -1,0 +1,13 @@
+[Unit]
+Description=Denkid Service
+After=pmcd.service
+# Conflicts=getty@tty1.service
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/pmpython /usr/local/sbin/denkid.py
+StandardInput=tty-force
+User=chris
+ 
+[Install]
+WantedBy=multi-user.target

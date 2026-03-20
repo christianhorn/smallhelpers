@@ -15,9 +15,14 @@ import re
 #	Higher frequency means higher accuracy
 # - we do not catch shortlived processes, living between start/end
 # - lookup specifics of proc.psinfo.utime source
-# - sometimes, "The processes consumed this many userland shares: -3120" is reported
 
-measuretime = 10
+# This here is the daemon-component: it's calculating the power-per-process
+# consumption and feeding it back to pmcd via 2 files for pmda-openmetrics:
+
+# To pick up: 
+# echo 'file:///tmp/openmetrics_power.txt' > /var/lib/pcp/pmdas/openmetrics/config.d/power.url
+
+measuretime = 30
 denkivar = 0
 consumptionpowernow = 0
 
@@ -134,6 +139,8 @@ while True:
 	print("Sleeping ",measuretime,"sec..")
 	time.sleep(measuretime)
 	
+	outfilepower = open('/tmp/openmetrics_power.txt', 'w', encoding="utf-8")
+
 	# copy over all data, for next cycle
 	pidutimeold = pidutime.copy()
 	denkivarold = denkivar
@@ -143,7 +150,7 @@ while True:
 
 	# Create a summary for each process name, i.e. count up
 	# multiple firefox threads
-	# procshortdict = {}
+	procshortdict = {}
 	userlandsum = 0
 	newprocs = 0
 
@@ -165,7 +172,7 @@ while True:
 		# We have a gauge metric, no need to compute
 		poweraverage = denkivar
 
-	print("System consumption:", "{:2.2f}".format(poweraverage),"W")
+	print("Overall system consumption:", "{:2.2f}".format(poweraverage),"W")
 	
 	# So, how many percent of the overall shares had each process?
 	procpercent = {}
@@ -176,25 +183,22 @@ while True:
 				pidutimediff = pidutime[pid] - pidutimeold[pid]
 				procpercent[pid] = int( 100 * pidutimediff / userlandsum)
 				procconsumed[pid] = procpercent[pid] * poweraverage / 100
-				# print(f"procpercent {procpercent[pid]} / diif {pidutimediff} psargs {pidpsargs[pid]}")
-				# print(f"procpercent {procpercent[pid]} / diif {pidutimediff}")
+	
+	for pid in procpercent.keys():
+		# print("debug:", pidpsargs[pid])
 
-	
-	sorted_items = sorted(procpercent.items(), key=lambda kv: (kv[1], kv[1]))
-	
-	print("")
-	print("+-- process consumption share from overall consumption")
-	print("|	 +-- process energy consumption")
-	print("|	 |	 +-- process pid and command")
-	print("|	 |	 |")
-	for key in sorted_items:
-		if key[1] >= 1:
-			# trim down command to one or 2 strings
-			resu = pidpsargs[key[0]].split(' ')
+		if ( procconsumed[pid] > 0.1 ):
+			# trim down command to one or 2 strings, for readability
+			resu = pidpsargs[pid].split(' ')
 			if ( len(resu) > 1 ):
 				myresu = f"{resu[0]} {resu[1]}"
 			else:
 				myresu = resu[0]
-			print(key[1],"%\t",
-				"{:2.1f}".format(procconsumed[key[0]]),"W\t",myresu)
-#				"{:2.1f}".format(procconsumed[key[0]]),"W\t",pidpsargs[key[0]][:80])
+
+			outstring = f"""proc.consumedpercent {{name="{pid} {myresu}"}} {"{:2.1f}".format(procpercent[pid])}\n"""
+			outfilepower.write(outstring)
+			outstring = f"""proc.consumed {{name="{pid} {myresu}"}} {"{:5.1f}".format(procconsumed[pid])}\n"""
+			outfilepower.write(outstring)
+
+	outfilepower.write(f"""overall {{name="system"}} {"{:5.2f}".format(poweraverage)} \n""")
+	outfilepower.close()
