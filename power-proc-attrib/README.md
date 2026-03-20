@@ -7,6 +7,10 @@ simply getting attributed to all of the processes.
 
 ![screenshot](screenshot.png)
 
+pcp-htop is a great client to show the data:
+
+![htop](screenshot-htop.png)
+
 
 ## Requirements/operation basics
 
@@ -148,3 +152,6 @@ minimum.
   Right now we just measure the instant values, but we want to quantify
   how much an application consumed "over the last 3 days".  This will
   allow comparing whole applications.
+- Extend into KVM guests.  The PCP in the guest needs to understand
+  how much the guest itself consumes, and then attribute consumoption
+  to the processes running in the guest.
