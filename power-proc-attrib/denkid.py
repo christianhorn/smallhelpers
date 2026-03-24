@@ -6,21 +6,20 @@ from pcp.pmapi import pmErr
 import cpmapi as c_api
 import time
 import re
+import subprocess
+import platform
 
 # Christian Horn <chorn@fluxcoil.net>
 # GPLv2
 #
 # TODO: 
-# - if looking at gauge metric like battery-power-now, we only consider single values.
-#	Higher frequency means higher accuracy
 # - we do not catch shortlived processes, living between start/end
 # - lookup specifics of proc.psinfo.utime source
 
 # This here is the daemon-component: it's calculating the power-per-process
-# consumption and feeding it back to pmcd via 2 files for pmda-openmetrics:
-
-# To pick up: 
-# echo 'file:///tmp/openmetrics_power.txt' > /var/lib/pcp/pmdas/openmetrics/config.d/power.url
+# consumption and feeding it back to pmcd via 2 files for pmda-openmetrics.
+# To have openmetrics pick it up:
+#   echo 'file:///tmp/openmetrics_power.txt' > /var/lib/pcp/pmdas/openmetrics/config.d/power.url
 
 measuretime = 30
 denkivar = 0
@@ -29,6 +28,8 @@ consumptionpowernow = 0
 pidutime = {}
 pidutimeold = {}
 pidpsargs = {}
+
+myhostname = re.sub('.local', '', platform.node())
 
 def check_metric_exists(metric_name):
 	try:
@@ -95,7 +96,7 @@ def fetchall():
 		pidutime[pid] = utime
 		pidpsargs[pid] = psargs
 
-	# Fetch energy-value
+	# Fetch energy-metric
 	if (powermetric == 'lmsensors.macsmc_hwmon_isa_0000.total_system_power'):
 		denkipmids = ctx.pmLookupName('lmsensors.macsmc_hwmon_isa_0000.total_system_power')
 		denkidescs = ctx.pmLookupDescs(denkipmids)
@@ -114,34 +115,53 @@ def fetchall():
 			c_api.PM_TYPE_U32)
 		denkivar = atom.ul
 
+	if (powermetric == 'hypervisor-pcp'):
+		pmout = subprocess.run(['pminfo', '-f', '-h', '192.168.4.1', 'openmetrics.power.proc.consumed'], capture_output=True, text=True)
+		for line in pmout.stdout.splitlines():
+			# Do we have a qemu-process here?
+			if re.match('^    inst.*qemu', line):
+				# Is it _our_ process?
+				namestr = re.sub('.*guest=', '', line)
+				namestr = re.sub(',.*', '', namestr)
+				if re.match(myhostname, namestr):
+					# print("Found my hostname: ", namestr)
+					myconsumptionstr = re.sub('.* ', '', line)
+					denkivar = float(myconsumptionstr)
+
 # Initialization
 
-powermetric = 'none'
+
 if check_metric_exists('lmsensors.macsmc_hwmon_isa_0000.total_system_power'):
 	print("Metric lmsensors.macsmc_hwmon_isa_0000.total_system_power was found, using that.")
 	powermetric = 'lmsensors.macsmc_hwmon_isa_0000.total_system_power'
 	# This metric is a gauge, no counter
 	powermetricgauge = 1
-
-if check_metric_exists('denki.rapl.msr'):
+elif check_metric_exists('denki.rapl.msr'):
 	print("Metric denki.rapl.msr was found, using that.")
 	powermetric = 'denki.rapl.msr'
 	# This metric is a counter
 	powermetricgauge = 0
-
-if ( powermetric == 'none' ): 
-	print("No usable power consumption metrics found!")
-	exit()
+else:
+	print("No physical sensors found, maybe I'm a KVM guest.")
+	print("Will try to get my power metric from the hypervisor's pmcd.")
+	return_code = subprocess.run(['pminfo', '-h', '192.168.4.1', 'openmetrics.power']).returncode  
+	if return_code == 0:  
+		print("Looks good, metric openmetrics.power was found.")  
+	else:
+		print("That did not work out.  So no metrics for system consumption were found. Exiting.")
+		exit()
+	powermetric = 'hypervisor-pcp'
+	powermetricgauge = 1
 
 fetchall()
 
 while True:
-	print("Sleeping ",measuretime,"sec..")
+	print("Sleeping",measuretime,"sec..")
 	time.sleep(measuretime)
 	
 	outfilepower = open('/tmp/openmetrics_power.txt', 'w', encoding="utf-8")
 
-	# copy over all data, for next cycle
+	# copy over old data from last cycle
 	pidutimeold = pidutime.copy()
 	denkivarold = denkivar
 
@@ -161,7 +181,7 @@ while True:
 		else:
 			newprocs += 1
 
-	print("The processes consumed this many userland shares:",userlandsum)
+	print("Number of consumed userland shares:", userlandsum)
 	print("New processes which appeared:",newprocs)
 	
 	if (powermetricgauge == 0):
@@ -172,7 +192,7 @@ while True:
 		# We have a gauge metric, no need to compute
 		poweraverage = denkivar
 
-	print("Overall system consumption:", "{:2.2f}".format(poweraverage),"W")
+	print("Overall system consumption:", "{:5.3f}".format(poweraverage),"W")
 	
 	# So, how many percent of the overall shares had each process?
 	procpercent = {}
@@ -185,20 +205,22 @@ while True:
 				procconsumed[pid] = procpercent[pid] * poweraverage / 100
 	
 	for pid in procpercent.keys():
-		# print("debug:", pidpsargs[pid])
-
-		if ( procconsumed[pid] > 0.1 ):
-			# trim down command to one or 2 strings, for readability
+		# if ( procconsumed[pid] > 0.1 ):
+		if ( procconsumed[pid] > 0 ):
+			# trim down command to a maximum of 3 strings, for readability.
+			# We need at least 3 so KVM guests can identify themself from the proc list.
 			resu = pidpsargs[pid].split(' ')
-			if ( len(resu) > 1 ):
+			if ( len(resu) > 2 ):
+				myresu = f"{resu[0]} {resu[1]} {resu[2]}"
+			elif ( len(resu) > 1 ):
 				myresu = f"{resu[0]} {resu[1]}"
 			else:
 				myresu = resu[0]
 
 			outstring = f"""proc.consumedpercent {{name="{pid} {myresu}"}} {"{:2.1f}".format(procpercent[pid])}\n"""
 			outfilepower.write(outstring)
-			outstring = f"""proc.consumed {{name="{pid} {myresu}"}} {"{:5.1f}".format(procconsumed[pid])}\n"""
+			outstring = f"""proc.consumed {{name="{pid} {myresu}"}} {"{:5.3f}".format(procconsumed[pid])}\n"""
 			outfilepower.write(outstring)
 
-	outfilepower.write(f"""overall {{name="system"}} {"{:5.2f}".format(poweraverage)} \n""")
+	outfilepower.write(f"""overall {{name="system"}} {"{:5.3f}".format(poweraverage)} \n""")
 	outfilepower.close()
