@@ -137,12 +137,6 @@ Now with the data in pmcd, let's use it!  Some options:
 Not sure where to start.. this is merely first implementation, the bare
 minimum.
 
-- I have a Debian RAPL system where the overall system consumption
-  is not appearing in the 4th indom of denki.rapl.msr, but the 0th
-  one.  The script is right now only coded for the 4th.  You can
-  confirm in watching 'pmrep -p denki.rapl.msr' output under load.
-  If you have such a system, in fetchall() you can change the code
-  to fetch the 0th instance instead of the 4th.
 - pcp-htop config does not yet sort by percent/consumption
 - data transfer to pmcd should happen via direct transfer, not via
   pmda-openmetrics.  Ideally we will use metrics below the denki 
