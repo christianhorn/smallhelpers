@@ -10,6 +10,7 @@ import subprocess
 import platform
 
 # Christian Horn <chorn@fluxcoil.net>
+# Anthony Harivel <aharivel@redhat.com>
 # GPLv2
 #
 # TODO: 
@@ -35,7 +36,8 @@ def check_metric_exists(metric_name):
 	try:
 		ctx = pmapi.pmContext(c_api.PM_CONTEXT_HOST, "local:")
 		pmids = ctx.pmLookupName([metric_name])
-		return True
+		results = ctx.pmFetch(pmids)
+		return results.contents.get_numval(0) > 0
 	except pmapi.pmErr:
 		return False
 
@@ -115,6 +117,15 @@ def fetchall():
 			c_api.PM_TYPE_U32)
 		denkivar = atom.ul
 
+	if (powermetric == 'denki.rapl.sysfs'):
+		denkipmids = ctx.pmLookupName('denki.rapl.sysfs')
+		denkidescs = ctx.pmLookupDescs(denkipmids)
+		denkiresults = ctx.pmFetch(denkipmids)
+		atom = ctx.pmExtractValue(denkiresults.contents.get_valfmt(0),
+			denkiresults.contents.get_vlist(0, 0), denkidescs[0].contents.type,
+			c_api.PM_TYPE_U64)
+		denkivar = atom.ull
+
 	if (powermetric == 'hypervisor-pcp'):
 		pmout = subprocess.run(['pminfo', '-f', '-h', '192.168.4.1', 'openmetrics.power.proc.consumed'], capture_output=True, text=True)
 		for line in pmout.stdout.splitlines():
@@ -139,6 +150,11 @@ if check_metric_exists('lmsensors.macsmc_hwmon_isa_0000.total_system_power'):
 elif check_metric_exists('denki.rapl.msr'):
 	print("Metric denki.rapl.msr was found, using that.")
 	powermetric = 'denki.rapl.msr'
+	# This metric is a counter
+	powermetricgauge = 0
+elif check_metric_exists('denki.rapl.sysfs'):
+	print("Metric denki.rapl.sysfs was found, using that.")
+	powermetric = 'denki.rapl.sysfs'
 	# This metric is a counter
 	powermetricgauge = 0
 else:
