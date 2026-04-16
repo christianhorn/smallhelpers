@@ -7,7 +7,7 @@ After=pmcd.service
 Type=simple
 ExecStart=/usr/bin/pmpython /usr/local/sbin/denkid.py
 StandardInput=tty-force
-User=chris
+User=pcp
  
 [Install]
 WantedBy=multi-user.target

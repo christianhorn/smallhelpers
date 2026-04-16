@@ -58,8 +58,8 @@ Then, install steps with exaple Fedora 43.  Below steps are to be
 executed from this repo, cloned to a local directory.
 ```
 # Setup pcp and pmdas, i.e. in execute
-sudo dnf -y install pcp-zeroconf pcp-pmda-denki pcp-pmda-openmetrics \
-  python3-pcp perl-PCP-PMDA pcp-devel pcp-libs-devel
+sudo dnf -y install pcp-pmda-denki pcp-pmda-openmetrics \
+  python3-pcp perl-PCP-PMDA
 cd /usr/libexec/pcp/pmdas/denki && ./Install
 cd /usr/libexec/pcp/pmdas/openmetrics && ./Install
 
